@@ -73,7 +73,7 @@ collection format." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gdalcubes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.9999</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -200,7 +200,7 @@ possible for a dataset, a collection format must be used.</p>
   <span class='no'>L8_files</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"L8NY18"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"gdalcubes"</span>),
                          <span class='st'>".TIF"</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>full.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
   <span class='fu'>create_image_collection</span>(<span class='no'>L8_files</span>, <span class='st'>"L8_L1TP"</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>"L8.db"</span>))
-}</div><div class='output co'>#&gt; <span class='error'>Error in libgdalcubes_create_image_collection_from_format(files, format,     out_file, unroll_archives): ERROR in collection_format::load_file(): image collection format file does not exist.</span></div></pre>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

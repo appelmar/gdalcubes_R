@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gdalcubes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.9999</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -132,7 +132,7 @@
     <p>Create a proxy data cube, which loads data from a given image collection according to a data cube view</p>
     </div>
 
-    <pre class="usage"><span class='fu'>raster_cube</span>(<span class='no'>image_collection</span>, <span class='no'>view</span>, <span class='kw'>mask</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>chunking</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>16</span>, <span class='fl'>256</span>, <span class='fl'>256</span>))</pre>
+    <pre class="usage"><span class='fu'>raster_cube</span>(<span class='no'>image_collection</span>, <span class='no'>view</span>, <span class='kw'>mask</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>chunking</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>256</span>, <span class='fl'>256</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -186,7 +186,7 @@
 #&gt; 
 #&gt; Dimensions:
 #&gt;        low     high count       pixel_size chunk_size
-#&gt; t  2018-01  2018-12    12              P1M         16
+#&gt; t  2018-01  2018-12    12              P1M          1
 #&gt; y  4345299  4744931   526 759.756653992395        256
 #&gt; x 388941.2 766552.4   497 759.781086519115        256
 #&gt; 
@@ -210,7 +210,7 @@
 #&gt; 
 #&gt; Dimensions:
 #&gt;        low     high count       pixel_size chunk_size
-#&gt; t  2018-01  2018-12    12              P1M         16
+#&gt; t  2018-01  2018-12    12              P1M          1
 #&gt; y  4345299  4744931   526 759.756653992395        256
 #&gt; x 388941.2 766552.4   497 759.781086519115        256
 #&gt; 

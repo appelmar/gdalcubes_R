@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot a gdalcubes data cube — plot.cube • gdalcubes</title>
+<title>Apply a user-defined R function over (multi-band) pixel time series — apply_time.cube • gdalcubes</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,12 @@
 
 
 
-<meta property="og:title" content="Plot a gdalcubes data cube — plot.cube" />
-<meta property="og:description" content="Plot a gdalcubes data cube" />
+<meta property="og:title" content="Apply a user-defined R function over (multi-band) pixel time series — apply_time.cube" />
+<meta property="og:description" content="Create a proxy data cube, which applies a user-defined R function over all pixel time series of a data cube. 
+In contrast to reduce_time, the time dimension is not reduced, i.e., resulting time series
+must have identical length as the input data cube but may contain a different number of bands / variables.
+Example uses of this function may include time series decompositions, cumulative sums / products, smoothing, sophisticated
+NA filling, or similar." />
 
 
 
@@ -123,121 +127,58 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot a gdalcubes data cube</h1>
-    <small class="dont-index">Source: <a href='https://github.com/appelmar/gdalcubes_R/blob/master/R/plot.R'><code>R/plot.R</code></a></small>
-    <div class="hidden name"><code>plot.cube.Rd</code></div>
+    <h1>Apply a user-defined R function over (multi-band) pixel time series</h1>
+    <small class="dont-index">Source: <a href='https://github.com/appelmar/gdalcubes_R/blob/master/R/apply_time.R'><code>R/apply_time.R</code></a></small>
+    <div class="hidden name"><code>apply_time.cube.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Plot a gdalcubes data cube</p>
+    <p>Create a proxy data cube, which applies a user-defined R function over all pixel time series of a data cube. 
+In contrast to <code><a href='reduce_time.html'>reduce_time</a></code>, the time dimension is not reduced, i.e., resulting time series
+must have identical length as the input data cube but may contain a different number of bands / variables.
+Example uses of this function may include time series decompositions, cumulative sums / products, smoothing, sophisticated
+NA filling, or similar.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for cube</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(
-  <span class='no'>x</span>,
-  <span class='no'>y</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>nbreaks</span> <span class='kw'>=</span> <span class='fl'>11</span>,
-  <span class='kw'>breaks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/grDevices/gray.html'>grey</a></span>(<span class='fl'>1</span>:(<span class='no'>nbreaks</span> - <span class='fl'>1</span>)/<span class='no'>nbreaks</span>),
-  <span class='kw'>key.pos</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>bands</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>t</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>rgb</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>zlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>periods.in.title</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>join.timeseries</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>axes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>na.color</span> <span class='kw'>=</span> <span class='st'>"#AAAAAA"</span>
-)</pre>
+<span class='fu'><a href='apply_time.html'>apply_time</a></span>(<span class='no'>x</span>, <span class='kw'>names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>keep_bands</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>FUN</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a data cube proxy object (class cube)</p></td>
+      <td><p>source data cube</p></td>
     </tr>
     <tr>
-      <th>y</th>
-      <td><p>__not used__</p></td>
+      <th>names</th>
+      <td><p>optional character vector to specify band names for the output cube</p></td>
+    </tr>
+    <tr>
+      <th>keep_bands</th>
+      <td><p>logical; keep bands of input data cube, defaults to FALSE, i.e., original bands will be dropped</p></td>
+    </tr>
+    <tr>
+      <th>FUN</th>
+      <td><p>user-defined R function that is applied on all pixel time series (see Details)</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>further arguments passed to <code>image.default</code></p></td>
-    </tr>
-    <tr>
-      <th>nbreaks</th>
-      <td><p>number of breaks, should be one more than the number of colors given</p></td>
-    </tr>
-    <tr>
-      <th>breaks</th>
-      <td><p>actual breaks used to assign colors to values; if missing, the function subsamples values and uses equally sized intervals between min and max or zlim[0] and zlim[1] if defined</p></td>
-    </tr>
-    <tr>
-      <th>col</th>
-      <td><p>color definition, can be a character vector with nbreaks - 1 elements or a function such as <code>heat.colors</code></p></td>
-    </tr>
-    <tr>
-      <th>key.pos</th>
-      <td><p>position for the legend, 1 (bottom), 2 (left), 3 (top), or 4 (right). If NULL (the default), do not plot a legend.</p></td>
-    </tr>
-    <tr>
-      <th>bands</th>
-      <td><p>integer vector with band numbers to plot (this must be band numbers, not band names)</p></td>
-    </tr>
-    <tr>
-      <th>t</th>
-      <td><p>integer vector with time indexes to plot (this must be time indexes, not date / time)</p></td>
-    </tr>
-    <tr>
-      <th>rgb</th>
-      <td><p>bands used to assign RGB color channels, vector of length 3 (this must be band numbers, not band names)</p></td>
-    </tr>
-    <tr>
-      <th>zlim</th>
-      <td><p>vector of length 2, defining the minimum and maximum values to either derive breaks, or define black and white values in RGB plots</p></td>
-    </tr>
-    <tr>
-      <th>periods.in.title</th>
-      <td><p>logical value, if TRUE, the title of plots includes the datetime period length as ISO 8601 string</p></td>
-    </tr>
-    <tr>
-      <th>join.timeseries</th>
-      <td><p>logical, for pure time-series plots, shall time series of multiple bands be plotted in a single plot (with different colors)?</p></td>
-    </tr>
-    <tr>
-      <th>axes</th>
-      <td><p>logical, if TRUE, plots include axes</p></td>
-    </tr>
-    <tr>
-      <th>ncol</th>
-      <td><p>number of columns for arranging plots with  <code><a href='https://rdrr.io/r/graphics/layout.html'>layout()</a></code>, see Details</p></td>
-    </tr>
-    <tr>
-      <th>nrow</th>
-      <td><p>number of rows for arranging plots with  <code><a href='https://rdrr.io/r/graphics/layout.html'>layout()</a></code>, see Details</p></td>
-    </tr>
-    <tr>
-      <th>na.color</th>
-      <td><p>color used to plot NA pixels</p></td>
+      <td><p>not used</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>a proxy data cube object</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The style of the plot depends on provided parameters and on the shape of the cube, i.e., whether it is a pure time series and whether it contains multiple bands or not.
-Multi-band, multi-temporal images will be arranged with <code><a href='https://rdrr.io/r/graphics/layout.html'>layout()</a></code> such that bands are represented by the x axis and time is represented by the y axis.
-Time series plots can be combined to a single plot by setting <code>join.timeseries = TRUE</code>. For other cases, a default arrangement of the plots is derived, trying to reach
-a square overall plot. The layout can be controlled with <code>ncol</code> and <code>nrow</code>, which define the number of rows and columns in the plot layout. Typically, only one of 
-<code>ncol</code> and <code>nrow</code> is provided. For multi-band, multi-temporal plots, the actual number of rows or columns can be less if the input cube has less bands or time slices.</p>
+    <p>FUN receives a single (multi-band) pixel time series as a matrix with rows corresponding to bands and columns corresponding to time.
+In general, the function must return a matrix with the same number of columns. If re result contains only a single band, it may alternatively return a vector 
+with length identical to the length of the input time series (number of columns of the input).</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>If caching is enabled for the package (see <code><a href='gdalcubes_use_cache.html'>gdalcubes_use_cache</a></code>), repeated calls of plot
-for the same data cube will not reevaluate the cube. Instead, the temporary result file will be reused, if possible.</p>
-<p>Some parts of the function have been copied from the stars package (c) Edzer Pebesma</p>
+    <p>This function returns a proxy object, i.e., it will not start any computations besides deriving the shape of the result.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># create image collection from example Landsat data only </span>
@@ -250,13 +191,37 @@ for the same data cube will not reevaluate the cube. Instead, the temporary resu
 
 <span class='no'>L8.col</span> <span class='kw'>=</span> <span class='fu'><a href='image_collection.html'>image_collection</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>"L8.db"</span>))
 <span class='no'>v</span> <span class='kw'>=</span> <span class='fu'><a href='cube_view.html'>cube_view</a></span>(<span class='kw'>extent</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>left</span><span class='kw'>=</span><span class='fl'>388941.2</span>, <span class='kw'>right</span><span class='kw'>=</span><span class='fl'>766552.4</span>,
-              <span class='kw'>bottom</span><span class='kw'>=</span><span class='fl'>4345299</span>, <span class='kw'>top</span><span class='kw'>=</span><span class='fl'>4744931</span>, <span class='kw'>t0</span><span class='kw'>=</span><span class='st'>"2018-04"</span>, <span class='kw'>t1</span><span class='kw'>=</span><span class='st'>"2018-06"</span>),
+              <span class='kw'>bottom</span><span class='kw'>=</span><span class='fl'>4345299</span>, <span class='kw'>top</span><span class='kw'>=</span><span class='fl'>4744931</span>, <span class='kw'>t0</span><span class='kw'>=</span><span class='st'>"2018-01"</span>, <span class='kw'>t1</span><span class='kw'>=</span><span class='st'>"2018-06"</span>),
               <span class='kw'>srs</span><span class='kw'>=</span><span class='st'>"EPSG:32618"</span>, <span class='kw'>nx</span> <span class='kw'>=</span> <span class='fl'>497</span>, <span class='kw'>ny</span><span class='kw'>=</span><span class='fl'>526</span>, <span class='kw'>dt</span><span class='kw'>=</span><span class='st'>"P1M"</span>)
-
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='fu'><a href='select_bands.html'>select_bands</a></span>(<span class='fu'><a href='raster_cube.html'>raster_cube</a></span>(<span class='no'>L8.col</span>, <span class='no'>v</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"B02"</span>, <span class='st'>"B03"</span>, <span class='st'>"B04"</span>)), <span class='kw'>rgb</span><span class='kw'>=</span><span class='fl'>3</span>:<span class='fl'>1</span>)</div><div class='img'><img src='plot.cube-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='no'>L8.cube</span> <span class='kw'>=</span> <span class='fu'><a href='select_bands.html'>select_bands</a></span>(<span class='fu'><a href='raster_cube.html'>raster_cube</a></span>(<span class='no'>L8.col</span>, <span class='no'>v</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"B04"</span>, <span class='st'>"B05"</span>))
+<span class='no'>L8.cube</span> <span class='kw'>=</span> <span class='fu'><a href='raster_cube.html'>raster_cube</a></span>(<span class='no'>L8.col</span>, <span class='no'>v</span>)
+<span class='no'>L8.cube</span> <span class='kw'>=</span> <span class='fu'><a href='select_bands.html'>select_bands</a></span>(<span class='no'>L8.cube</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"B04"</span>, <span class='st'>"B05"</span>))
 <span class='no'>L8.ndvi</span> <span class='kw'>=</span> <span class='fu'><a href='apply_pixel.html'>apply_pixel</a></span>(<span class='no'>L8.cube</span>, <span class='st'>"(B05-B04)/(B05+B04)"</span>, <span class='st'>"NDVI"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='fu'><a href='reduce_time.html'>reduce_time</a></span>(<span class='no'>L8.ndvi</span>, <span class='st'>"median(NDVI)"</span>), <span class='kw'>key.pos</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>zlim</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>))</div><div class='img'><img src='plot.cube-2.png' alt='' width='700' height='433' /></div><div class='input'>
+
+<span class='co'># Apply a user defined R function</span>
+<span class='no'>L8.ndvi.resid</span> <span class='kw'>=</span> <span class='fu'><a href='apply_time.html'>apply_time</a></span>(<span class='no'>L8.ndvi</span>, <span class='kw'>names</span><span class='kw'>=</span><span class='st'>"NDVI_residuals"</span>,
+   <span class='kw'>FUN</span><span class='kw'>=</span><span class='kw'>function</span>(<span class='no'>x</span>) {
+      <span class='no'>y</span> <span class='kw'>=</span> <span class='no'>x</span>[<span class='st'>"NDVI"</span>,]
+      <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/is.finite.html'>is.finite</a></span>(<span class='no'>y</span>)) <span class='kw'>&lt;</span> <span class='fl'>3</span>) {
+         <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>NA</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>x</span>)))
+      }
+      <span class='no'>t</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>x</span>)
+      <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>y</span> ~ <span class='no'>t</span>)) -  <span class='no'>x</span>[<span class='st'>"NDVI"</span>,])
+   })
+<span class='no'>L8.ndvi.resid</span></div><div class='output co'>#&gt; A GDAL data cube proxy object
+#&gt; 
+#&gt; Dimensions:
+#&gt;        low     high count       pixel_size chunk_size
+#&gt; t  2018-01  2018-06     6              P1M          6
+#&gt; y  4345299  4744931   526 759.756653992395        256
+#&gt; x 388941.2 766552.4   497 759.781086519115        256
+#&gt; 
+#&gt; Bands:
+#&gt;             name offset scale nodata unit
+#&gt; 1 NDVI_residuals      0     1    NaN     
+#&gt; </div><div class='input'>
+<span class='co'># \donttest{</span>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>L8.ndvi.resid</span>)</div><div class='img'><img src='apply_time.cube-1.png' alt='' width='700' height='433' /></div><div class='input'># }
+ 
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

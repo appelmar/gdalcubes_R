@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gdalcubes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.9999</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -119,7 +119,6 @@
 <a href="#creating-an-image-collection" class="anchor"></a>Creating an image collection</h1>
 <p>As a first step, we must combine the set of files for the first MODIS product (MOD11A2) in a single <em>image collection</em>. The image collection is a simple index, pointing to files and storing the spatial extent, spatial reference system, aquisition date/time of images and how files relate to image bands. The package comes with a set of predefined rules (called <em>image collection formats</em>), how this information can be extracted from filenames for selected EO products. A list of available collection formats including a short description can be printed with:</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">gdalcubes</span>)
-<span class="co">## Using gdalcubes library version 0.2.9999</span>
 <span class="fu"><a href="../reference/collection_formats.html">collection_formats</a></span>()
 <span class="co">##    CHIRPS_v2_0_daily_p05_tif | Image collection format for CHIRPS v 2.0 daily</span>
 <span class="co">##                              | global precipitation dataset (0.05 degrees</span>
@@ -131,11 +130,23 @@
 <span class="co">##                              | resolution) from GeoTIFFs, expects list of .tif</span>
 <span class="co">##                              | or .tif.gz files as input. [TAGS: CHIRPS,</span>
 <span class="co">##                              | precipitation]</span>
+<span class="co">##            ESA_CCI_SM_ACTIVE | Collection format for ESA CCI soil moisture</span>
+<span class="co">##                              | active product (version 4.7) [TAGS: Soil</span>
+<span class="co">##                              | Moisture, ESA, CCI]</span>
+<span class="co">##           ESA_CCI_SM_PASSIVE | Collection format for ESA CCI soil moisture</span>
+<span class="co">##                              | passive product (version 4.7) [TAGS: Soil</span>
+<span class="co">##                              | Moisture, ESA, CCI]</span>
+<span class="co">##    GPM_IMERG_3B_DAY_GIS_V06A | Collection format for daily</span>
+<span class="co">##                              | IMERG_3B_DAY_GIS_V06A data [TAGS: Precipitation,</span>
+<span class="co">##                              | GPM, IMERG]</span>
 <span class="co">##                      L8_L1TP | Collection format for Landsat 8 Level 1 TP</span>
 <span class="co">##                              | product [TAGS: Landsat, USGS, Level 1, NASA]</span>
 <span class="co">##                        L8_SR | Collection format for Landsat 8 surface</span>
 <span class="co">##                              | reflectance product [TAGS: Landsat, USGS, Level</span>
 <span class="co">##                              | 2, NASA, surface reflectance]</span>
+<span class="co">##                      MxD09GA | Collection format for selected bands from the</span>
+<span class="co">##                              | MODIS MxD09GA (Aqua and Terra) product [TAGS:</span>
+<span class="co">##                              | MODIS, surface reflectance]</span>
 <span class="co">##                      MxD10A2 | Collection format for selected bands from the</span>
 <span class="co">##                              | MODIS MxD10A2 (Aqua and Terra) v006 Snow Cover</span>
 <span class="co">##                              | product [TAGS: MODIS, Snow Cover]</span>
@@ -192,12 +203,12 @@
 <span class="co">## A GDAL image collection object, referencing 140 images with 8  bands</span>
 <span class="co">## Images:</span>
 <span class="co">##                                                                name      left</span>
-<span class="co">## 1 /tmp/RtmpWNXBS2/MOD11A2/MOD11A2.A2018001.h17v03.006.2018011145329 -20.00000</span>
-<span class="co">## 2 /tmp/RtmpWNXBS2/MOD11A2/MOD11A2.A2018001.h17v04.006.2018011145438 -15.55724</span>
-<span class="co">## 3 /tmp/RtmpWNXBS2/MOD11A2/MOD11A2.A2018001.h18v03.006.2018011145428   0.00000</span>
-<span class="co">## 4 /tmp/RtmpWNXBS2/MOD11A2/MOD11A2.A2018001.h18v04.006.2018011145326   0.00000</span>
-<span class="co">## 5 /tmp/RtmpWNXBS2/MOD11A2/MOD11A2.A2018009.h17v03.006.2018018034330 -20.00000</span>
-<span class="co">## 6 /tmp/RtmpWNXBS2/MOD11A2/MOD11A2.A2018009.h17v04.006.2018018034246 -15.55724</span>
+<span class="co">## 1 /tmp/RtmpKgLLYJ/MOD11A2/MOD11A2.A2018001.h17v03.006.2018011145329 -20.00000</span>
+<span class="co">## 2 /tmp/RtmpKgLLYJ/MOD11A2/MOD11A2.A2018001.h17v04.006.2018011145438 -15.55724</span>
+<span class="co">## 3 /tmp/RtmpKgLLYJ/MOD11A2/MOD11A2.A2018001.h18v03.006.2018011145428   0.00000</span>
+<span class="co">## 4 /tmp/RtmpKgLLYJ/MOD11A2/MOD11A2.A2018001.h18v04.006.2018011145326   0.00000</span>
+<span class="co">## 5 /tmp/RtmpKgLLYJ/MOD11A2/MOD11A2.A2018009.h17v03.006.2018018034330 -20.00000</span>
+<span class="co">## 6 /tmp/RtmpKgLLYJ/MOD11A2/MOD11A2.A2018009.h17v04.006.2018018034246 -15.55724</span>
 <span class="co">##   top bottom    right            datetime</span>
 <span class="co">## 1  60     50  0.00000 2018-01-01T00:00:00</span>
 <span class="co">## 2  50     40  0.00000 2018-01-01T00:00:00</span>
@@ -241,7 +252,7 @@
 <span class="co">## </span>
 <span class="co">## Dimensions:</span>
 <span class="co">##                 low             high count       pixel_size chunk_size</span>
-<span class="co">## t           2018-01          2018-10     4              P3M         16</span>
+<span class="co">## t           2018-01          2018-10     4              P3M          1</span>
 <span class="co">## y  4447802.07906609 6671703.11859914   413 5384.74827974103        256</span>
 <span class="co">## x -1703607.03338081 1703607.03338081   633 5382.64465523162        256</span>
 <span class="co">## </span>
@@ -281,7 +292,7 @@
 <span class="co">## [1] "P3M"</span>
 <span class="co">## </span>
 <span class="co">## $t$chunk_size</span>
-<span class="co">## [1] 16</span>
+<span class="co">## [1] 1</span>
 <span class="co">## </span>
 <span class="co">## </span>
 <span class="co">## $y</span>
@@ -340,7 +351,7 @@
 <span class="co">## </span>
 <span class="co">## Dimensions:</span>
 <span class="co">##                 low             high count       pixel_size chunk_size</span>
-<span class="co">## t           2018-01          2018-09     9              P1M         16</span>
+<span class="co">## t           2018-01          2018-09     9              P1M          1</span>
 <span class="co">## y  4447802.07906609 6671703.11859914   261 8520.69363805765        256</span>
 <span class="co">## x -1703607.03338081 1703607.03338081   400 8518.03516690404        256</span>
 <span class="co">## </span>

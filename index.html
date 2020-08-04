@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">gdalcubes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.9999</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -88,9 +88,9 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<div id="gdalcubes" class="section level1">
+<div id="gdalcubes-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#gdalcubes" class="anchor"></a>gdalcubes <img src=".img/logo.svg" align="right" alt="" width="120">
+<a href="#gdalcubes-" class="anchor"></a>gdalcubes <img src=".img/logo.svg" align="right" alt="" width="120">
 </h1></div>
 
 <p>The R package <code>gdalcubes</code> aims at making analyses of large satellite image collections easier, faster, more intuitive, and more interactive.</p>
@@ -129,20 +129,20 @@
 <h2 class="hasAnchor">
 <a href="#linux" class="anchor"></a>Linux</h2>
 <p>Please install the system libraries e.g. with the package manager of your Linux distribution. Also make sure that you are using a recent version of GDAL (&gt;2.3.0). On Ubuntu, the following commands install all libraries.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">sudo add<span class="op">-</span>apt<span class="op">-</span>repository ppa<span class="op">:</span>ubuntugis<span class="op">/</span>ppa <span class="op">&amp;&amp;</span><span class="st"> </span>sudo apt<span class="op">-</span>get update</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">sudo apt<span class="op">-</span>get install libgdal<span class="op">-</span>dev libnetcdf<span class="op">-</span>dev libcurl4<span class="op">-</span>openssl<span class="op">-</span>dev libsqlite3<span class="op">-</span>dev libudunits2<span class="op">-</span>dev</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>sudo add<span class="op">-</span>apt<span class="op">-</span>repository ppa<span class="op">:</span>ubuntugis<span class="op">/</span>ppa <span class="op">&amp;&amp;</span><span class="st"> </span>sudo apt<span class="op">-</span>get update</span>
+<span id="cb3-2"><a href="#cb3-2"></a>sudo apt<span class="op">-</span>get install libgdal<span class="op">-</span>dev libnetcdf<span class="op">-</span>dev libcurl4<span class="op">-</span>openssl<span class="op">-</span>dev libsqlite3<span class="op">-</span>dev libudunits2<span class="op">-</span>dev</span></code></pre></div>
 </div>
 <div id="macos" class="section level2">
 <h2 class="hasAnchor">
 <a href="#macos" class="anchor"></a>MacOS</h2>
 <p>Use <a href="https://brew.sh">Homebrew</a> to install system libraries with</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">brew install pkg<span class="op">-</span>config</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">brew install gdal</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">brew install netcdf</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">brew install libgit2</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">brew install udunits</a>
-<a class="sourceLine" id="cb4-6" data-line-number="6">brew install curl</a>
-<a class="sourceLine" id="cb4-7" data-line-number="7">brew install sqlite</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>brew install pkg<span class="op">-</span>config</span>
+<span id="cb4-2"><a href="#cb4-2"></a>brew install gdal</span>
+<span id="cb4-3"><a href="#cb4-3"></a>brew install netcdf</span>
+<span id="cb4-4"><a href="#cb4-4"></a>brew install libgit2</span>
+<span id="cb4-5"><a href="#cb4-5"></a>brew install udunits</span>
+<span id="cb4-6"><a href="#cb4-6"></a>brew install curl</span>
+<span id="cb4-7"><a href="#cb4-7"></a>brew install sqlite</span></code></pre></div>
 </div>
 </div>
 <div id="getting-started" class="section level1">
@@ -160,142 +160,142 @@
 <h2 class="hasAnchor">
 <a href="#creating-an-image-collection" class="anchor"></a>Creating an image collection</h2>
 <p>At first, we must scan all available images once, and extract some metadata such as their spatial extent and acquisition time. The resulting <em>image collection</em> is stored on disk, and typically consumes a few kilobytes per image. Due to the diverse structure of satellite image products, the rules how to derive the required metadata are formalized as <em>collection_formats</em>. The package comes with predefined formats for some Sentinel, Landsat, and MODIS products (see <code><a href="reference/collection_formats.html">collection_formats()</a></code> to print a list of available formats).</p>
-<div class="sourceCode" id="cb6"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">gdalcubes</span>)</pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co">## Using gdalcubes library version 0.2.9999</span></a></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="r"><span class="fu"><a href="reference/gdalcubes_options.html">gdalcubes_options</a></span>(<span class="kw">threads</span><span class="kw">=</span><span class="fl">8</span>)
+<div class="sourceCode" id="cb6"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">gdalcubes</span>)
+
+<span class="fu"><a href="reference/gdalcubes_options.html">gdalcubes_options</a></span>(<span class="kw">threads</span><span class="kw">=</span><span class="fl">8</span>)
 
 <span class="no">files</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="st">"L8_Amazon"</span>, <span class="kw">recursive</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
                    <span class="kw">full.names</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">pattern</span> <span class="kw">=</span> <span class="st">".tif"</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">files</span>)</pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co">## [1] 1800</span></a></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/file.info.html">file.size</a></span>(<span class="no">files</span>)) / <span class="fl">1024</span>^<span class="fl">2</span> <span class="co"># MiB</span></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co">## [1] 1919.118</span></a></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="r"><span class="no">L8.col</span> <span class="kw">=</span> <span class="fu"><a href="reference/create_image_collection.html">create_image_collection</a></span>(<span class="no">files</span>, <span class="kw">format</span> <span class="kw">=</span> <span class="st">"L8_SR"</span>, <span class="kw">out_file</span> <span class="kw">=</span> <span class="st">"L8.db"</span>)</pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">## [1] 1800</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/file.info.html">file.size</a></span>(<span class="no">files</span>)) / <span class="fl">1024</span>^<span class="fl">2</span> <span class="co"># MiB</span></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">## [1] 1919.118</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="r"><span class="no">L8.col</span> <span class="kw">=</span> <span class="fu"><a href="reference/create_image_collection.html">create_image_collection</a></span>(<span class="no">files</span>, <span class="kw">format</span> <span class="kw">=</span> <span class="st">"L8_SR"</span>, <span class="kw">out_file</span> <span class="kw">=</span> <span class="st">"L8.db"</span>)</pre></div>
 </div>
 <div id="creating-data-cubes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#creating-data-cubes" class="anchor"></a>Creating data cubes</h2>
 <p>To create a regular raster data cube from the image collection, we define the geometry of our target cube as a <em>data cube view</em>, using the <code><a href="reference/cube_view.html">cube_view()</a></code> function. We define a simple overview, covering the full spatiotemporal extent of the imagery at 1km x 1km pixel size where one data cube cell represents a duration of one year. The provided resampling and aggregation methods are used to spatially reproject, crop, and rescale individual images and combine pixel values from many images within one year respectively. The <code><a href="reference/raster_cube.html">raster_cube()</a></code> function returns a <em>proxy</em> object, i.e., it returns immediately without doing any expensive computations.</p>
-<div class="sourceCode" id="cb13"><pre class="r"><span class="no">v.overview</span> <span class="kw">=</span> <span class="fu"><a href="reference/cube_view.html">cube_view</a></span>(<span class="kw">extent</span><span class="kw">=</span><span class="no">L8.col</span>, <span class="kw">dt</span><span class="kw">=</span><span class="st">"P1Y"</span>, <span class="kw">dx</span><span class="kw">=</span><span class="fl">1000</span>, <span class="kw">dy</span><span class="kw">=</span><span class="fl">1000</span>, <span class="kw">srs</span><span class="kw">=</span><span class="st">"EPSG:3857"</span>,
+<div class="sourceCode" id="cb11"><pre class="r"><span class="no">v.overview</span> <span class="kw">=</span> <span class="fu"><a href="reference/cube_view.html">cube_view</a></span>(<span class="kw">extent</span><span class="kw">=</span><span class="no">L8.col</span>, <span class="kw">dt</span><span class="kw">=</span><span class="st">"P1Y"</span>, <span class="kw">dx</span><span class="kw">=</span><span class="fl">1000</span>, <span class="kw">dy</span><span class="kw">=</span><span class="fl">1000</span>, <span class="kw">srs</span><span class="kw">=</span><span class="st">"EPSG:3857"</span>,
                       <span class="kw">aggregation</span> <span class="kw">=</span> <span class="st">"median"</span>, <span class="kw">resampling</span> <span class="kw">=</span> <span class="st">"bilinear"</span>)
 <span class="fu"><a href="reference/raster_cube.html">raster_cube</a></span>(<span class="no">L8.col</span>, <span class="no">v.overview</span>)</pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co">## A GDAL data cube proxy object</span></a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="co">## </span></a>
-<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="co">## Dimensions:</span></a>
-<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co">##                 low              high count pixel_size chunk_size</span></a>
-<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="co">## t              2013              2019     7        P1Y         16</span></a>
-<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="co">## y -764014.387686915 -205014.387686915   559       1000        256</span></a>
-<a class="sourceLine" id="cb14-7" data-line-number="7"><span class="co">## x -6582280.06164712 -5799280.06164712   783       1000        256</span></a>
-<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="co">## </span></a>
-<a class="sourceLine" id="cb14-9" data-line-number="9"><span class="co">## Bands:</span></a>
-<a class="sourceLine" id="cb14-10" data-line-number="10"><span class="co">##         name offset scale nodata unit</span></a>
-<a class="sourceLine" id="cb14-11" data-line-number="11"><span class="co">## 1    AEROSOL      0     1    NaN     </span></a>
-<a class="sourceLine" id="cb14-12" data-line-number="12"><span class="co">## 2        B01      0     1    NaN     </span></a>
-<a class="sourceLine" id="cb14-13" data-line-number="13"><span class="co">## 3        B02      0     1    NaN     </span></a>
-<a class="sourceLine" id="cb14-14" data-line-number="14"><span class="co">## 4        B03      0     1    NaN     </span></a>
-<a class="sourceLine" id="cb14-15" data-line-number="15"><span class="co">## 5        B04      0     1    NaN     </span></a>
-<a class="sourceLine" id="cb14-16" data-line-number="16"><span class="co">## 6        B05      0     1    NaN     </span></a>
-<a class="sourceLine" id="cb14-17" data-line-number="17"><span class="co">## 7        B06      0     1    NaN     </span></a>
-<a class="sourceLine" id="cb14-18" data-line-number="18"><span class="co">## 8        B07      0     1    NaN     </span></a>
-<a class="sourceLine" id="cb14-19" data-line-number="19"><span class="co">## 9   PIXEL_QA      0     1    NaN     </span></a>
-<a class="sourceLine" id="cb14-20" data-line-number="20"><span class="co">## 10 RADSAT_QA      0     1    NaN</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">## A GDAL data cube proxy object</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="co">## </span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co">## Dimensions:</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co">##                 low              high count pixel_size chunk_size</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="co">## t              2013              2019     7        P1Y          1</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="co">## y -764014.387686915 -205014.387686915   559       1000        256</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="co">## x -6582280.06164712 -5799280.06164712   783       1000        256</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="co">## </span></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="co">## Bands:</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="co">##         name offset scale nodata unit</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a><span class="co">## 1    AEROSOL      0     1    NaN     </span></span>
+<span id="cb12-12"><a href="#cb12-12"></a><span class="co">## 2        B01      0     1    NaN     </span></span>
+<span id="cb12-13"><a href="#cb12-13"></a><span class="co">## 3        B02      0     1    NaN     </span></span>
+<span id="cb12-14"><a href="#cb12-14"></a><span class="co">## 4        B03      0     1    NaN     </span></span>
+<span id="cb12-15"><a href="#cb12-15"></a><span class="co">## 5        B04      0     1    NaN     </span></span>
+<span id="cb12-16"><a href="#cb12-16"></a><span class="co">## 6        B05      0     1    NaN     </span></span>
+<span id="cb12-17"><a href="#cb12-17"></a><span class="co">## 7        B06      0     1    NaN     </span></span>
+<span id="cb12-18"><a href="#cb12-18"></a><span class="co">## 8        B07      0     1    NaN     </span></span>
+<span id="cb12-19"><a href="#cb12-19"></a><span class="co">## 9   PIXEL_QA      0     1    NaN     </span></span>
+<span id="cb12-20"><a href="#cb12-20"></a><span class="co">## 10 RADSAT_QA      0     1    NaN</span></span></code></pre></div>
 </div>
 <div id="processing-data-cubes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#processing-data-cubes" class="anchor"></a>Processing data cubes</h2>
 <p>We can apply (and chain) operations on data cubes:</p>
-<div class="sourceCode" id="cb15"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">magrittr</span>)) <span class="co"># for %&gt;%</span>
+<div class="sourceCode" id="cb13"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">magrittr</span>)) <span class="co"># for %&gt;%</span>
 <span class="no">x</span> <span class="kw">=</span> <span class="fu"><a href="reference/raster_cube.html">raster_cube</a></span>(<span class="no">L8.col</span>, <span class="no">v.overview</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/select_bands.html">select_bands</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"B02"</span>,<span class="st">"B03"</span>,<span class="st">"B04"</span>)) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/reduce_time.html">reduce_time</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"median(B02)"</span>,<span class="st">"median(B03)"</span>,<span class="st">"median(B04)"</span>))
 <span class="no">x</span></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="co">## A GDAL data cube proxy object</span></a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co">## </span></a>
-<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co">## Dimensions:</span></a>
-<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co">##                 low              high count pixel_size chunk_size</span></a>
-<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="co">## t              2013              2013     1        P7Y          1</span></a>
-<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co">## y -764014.387686915 -205014.387686915   559       1000        256</span></a>
-<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="co">## x -6582280.06164712 -5799280.06164712   783       1000        256</span></a>
-<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="co">## </span></a>
-<a class="sourceLine" id="cb16-9" data-line-number="9"><span class="co">## Bands:</span></a>
-<a class="sourceLine" id="cb16-10" data-line-number="10"><span class="co">##         name offset scale nodata unit</span></a>
-<a class="sourceLine" id="cb16-11" data-line-number="11"><span class="co">## 1 B02_median      0     1    NaN     </span></a>
-<a class="sourceLine" id="cb16-12" data-line-number="12"><span class="co">## 2 B03_median      0     1    NaN     </span></a>
-<a class="sourceLine" id="cb16-13" data-line-number="13"><span class="co">## 3 B04_median      0     1    NaN</span></a></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">x</span>, <span class="kw">rgb</span><span class="kw">=</span><span class="fl">3</span>:<span class="fl">1</span>, <span class="kw">zlim</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>,<span class="fl">1200</span>))</pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co">## A GDAL data cube proxy object</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="co">## </span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="co">## Dimensions:</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="co">##                 low              high count pixel_size chunk_size</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="co">## t              2013              2013     1        P7Y          1</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="co">## y -764014.387686915 -205014.387686915   559       1000        256</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="co">## x -6582280.06164712 -5799280.06164712   783       1000        256</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="co">## </span></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="co">## Bands:</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a><span class="co">##         name offset scale nodata unit</span></span>
+<span id="cb14-11"><a href="#cb14-11"></a><span class="co">## 1 B02_median      0     1    NaN     </span></span>
+<span id="cb14-12"><a href="#cb14-12"></a><span class="co">## 2 B03_median      0     1    NaN     </span></span>
+<span id="cb14-13"><a href="#cb14-13"></a><span class="co">## 3 B04_median      0     1    NaN</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">x</span>, <span class="kw">rgb</span><span class="kw">=</span><span class="fl">3</span>:<span class="fl">1</span>, <span class="kw">zlim</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>,<span class="fl">1200</span>))</pre></div>
 <p><img src=".img/cubes-1.png"><!-- --></p>
-<div class="sourceCode" id="cb18"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">RColorBrewer</span>)
+<div class="sourceCode" id="cb16"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">RColorBrewer</span>)
  <span class="fu"><a href="reference/raster_cube.html">raster_cube</a></span>(<span class="no">L8.col</span>, <span class="no">v.overview</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/select_bands.html">select_bands</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"B04"</span>,<span class="st">"B05"</span>)) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/apply_pixel.html">apply_pixel</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"(B05-B04)/(B05+B04)"</span>), <span class="kw">names</span><span class="kw">=</span><span class="st">"NDVI"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw">zlim</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>,<span class="fl">1</span>),  <span class="kw">nbreaks</span><span class="kw">=</span><span class="fl">10</span>, <span class="kw">col</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span>(<span class="fl">9</span>, <span class="st">"YlGn"</span>), <span class="kw">key.pos</span><span class="kw">=</span><span class="fl">1</span>)</pre></div>
 <p><img src=".img/cubes-2.png"><!-- --></p>
-<p>Calling data cube operations always returns <em>proxy</em> objects, computations are started lazily when users call e.g. <code><a href="https://rdrr.io/pkg/sf/man/plot.html">plot()</a></code>.</p>
+<p>Calling data cube operations always returns <em>proxy</em> objects, computations are started lazily when users call e.g. <code><a href="https://rdrr.io/pkg/sf/man/plot.html">plot()</a></code>.</p>
 </div>
 <div id="animations" class="section level2">
 <h2 class="hasAnchor">
 <a href="#animations" class="anchor"></a>Animations</h2>
 <p>Multitemporal data cubes can be animated (thanks to the <a href="https://cran.r-project.org/web/packages/magick/index.html">magick package</a>):</p>
-<div class="sourceCode" id="cb19"><pre class="r"><span class="no">v.subarea.yearly</span> <span class="kw">=</span> <span class="fu"><a href="reference/cube_view.html">cube_view</a></span>(<span class="kw">extent</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">left</span><span class="kw">=</span>-<span class="fl">6180000</span>, <span class="kw">right</span><span class="kw">=</span>-<span class="fl">6080000</span>, <span class="kw">bottom</span><span class="kw">=</span>-<span class="fl">550000</span>, <span class="kw">top</span><span class="kw">=</span>-<span class="fl">450000</span>,
+<div class="sourceCode" id="cb17"><pre class="r"><span class="no">v.subarea.yearly</span> <span class="kw">=</span> <span class="fu"><a href="reference/cube_view.html">cube_view</a></span>(<span class="kw">extent</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">left</span><span class="kw">=</span>-<span class="fl">6180000</span>, <span class="kw">right</span><span class="kw">=</span>-<span class="fl">6080000</span>, <span class="kw">bottom</span><span class="kw">=</span>-<span class="fl">550000</span>, <span class="kw">top</span><span class="kw">=</span>-<span class="fl">450000</span>,
                              <span class="kw">t0</span><span class="kw">=</span><span class="st">"2014-01-01"</span>, <span class="kw">t1</span><span class="kw">=</span><span class="st">"2018-12-31"</span>), <span class="kw">dt</span><span class="kw">=</span><span class="st">"P1Y"</span>, <span class="kw">dx</span><span class="kw">=</span><span class="fl">50</span>, <span class="kw">dy</span><span class="kw">=</span><span class="fl">50</span>,
                              <span class="kw">srs</span><span class="kw">=</span><span class="st">"EPSG:3857"</span>, <span class="kw">aggregation</span> <span class="kw">=</span> <span class="st">"median"</span>, <span class="kw">resampling</span> <span class="kw">=</span> <span class="st">"bilinear"</span>)
 
 <span class="fu"><a href="reference/raster_cube.html">raster_cube</a></span>(<span class="no">L8.col</span>, <span class="no">v.subarea.yearly</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/select_bands.html">select_bands</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"B02"</span>,<span class="st">"B03"</span>,<span class="st">"B04"</span>)) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/animate.html">animate</a></span>(<span class="kw">rgb</span><span class="kw">=</span><span class="fl">3</span>:<span class="fl">1</span>, <span class="kw">zlim</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">100</span>,<span class="fl">1000</span>))</pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="co">##   format width height colorspace matte filesize density</span></a>
-<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="co">## 1    gif   672    480       sRGB FALSE        0   72x72</span></a>
-<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="co">## 2    gif   672    480       sRGB  TRUE        0   72x72</span></a>
-<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="co">## 3    gif   672    480       sRGB  TRUE        0   72x72</span></a>
-<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="co">## 4    gif   672    480       sRGB  TRUE        0   72x72</span></a>
-<a class="sourceLine" id="cb20-6" data-line-number="6"><span class="co">## 5    gif   672    480       sRGB  TRUE        0   72x72</span></a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co">##   format width height colorspace matte filesize density</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="co">## 1    gif   672    480       sRGB FALSE        0   72x72</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="co">## 2    gif   672    480       sRGB  TRUE        0   72x72</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="co">## 3    gif   672    480       sRGB  TRUE        0   72x72</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="co">## 4    gif   672    480       sRGB  TRUE        0   72x72</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="co">## 5    gif   672    480       sRGB  TRUE        0   72x72</span></span></code></pre></div>
 <p><img src=".img/animation-2.gif"><!-- --></p>
 </div>
 <div id="data-cube-export" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data-cube-export" class="anchor"></a>Data cube export</h2>
 <p>Data cubes can be exported as single netCDF files with <code><a href="reference/write_ncdf.html">write_ncdf()</a></code>, or as a collection of (possibly cloud-optimized) GeoTIFF files with <code><a href="reference/write_tif.html">write_tif()</a></code>, where each time slice of the cube yields one GeoTIFF file. Data cubes can also be converted to <code>raster</code> or <code>stars</code>objects:</p>
-<div class="sourceCode" id="cb21"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">raster</span>))
+<div class="sourceCode" id="cb19"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">raster</span>))
 <span class="fu"><a href="reference/raster_cube.html">raster_cube</a></span>(<span class="no">L8.col</span>, <span class="no">v.overview</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/select_bands.html">select_bands</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"B04"</span>,<span class="st">"B05"</span>)) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/apply_pixel.html">apply_pixel</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"(B05-B04)/(B05+B04)"</span>), <span class="kw">names</span><span class="kw">=</span><span class="st">"NDVI"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/write_tif.html">write_tif</a></span>() <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/raster/man/stack.html">stack</a></span>() <span class="kw">-&gt;</span> <span class="no">x</span>
 <span class="no">x</span></pre></div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="co">## class      : RasterStack </span></a>
-<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="co">## dimensions : 559, 783, 437697, 7  (nrow, ncol, ncell, nlayers)</span></a>
-<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="co">## resolution : 1000, 1000  (x, y)</span></a>
-<a class="sourceLine" id="cb22-4" data-line-number="4"><span class="co">## extent     : -6582280, -5799280, -764014.4, -205014.4  (xmin, xmax, ymin, ymax)</span></a>
-<a class="sourceLine" id="cb22-5" data-line-number="5"><span class="co">## crs        : +proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +no_defs </span></a>
-<a class="sourceLine" id="cb22-6" data-line-number="6"><span class="co">## names      : cube_5f7aecc5f032013, cube_5f7aecc5f032014, cube_5f7aecc5f032015, cube_5f7aecc5f032016, cube_5f7aecc5f032017, cube_5f7aecc5f032018, cube_5f7aecc5f032019</span></a></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">stars</span>))
+<div class="sourceCode" id="cb20"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co">## class      : RasterStack </span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="co">## dimensions : 559, 783, 437697, 7  (nrow, ncol, ncell, nlayers)</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="co">## resolution : 1000, 1000  (x, y)</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="co">## extent     : -6582280, -5799280, -764014.4, -205014.4  (xmin, xmax, ymin, ymax)</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="co">## crs        : +proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +no_defs </span></span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="co">## names      : cube_22054ca59f3b2013, cube_22054ca59f3b2014, cube_22054ca59f3b2015, cube_22054ca59f3b2016, cube_22054ca59f3b2017, cube_22054ca59f3b2018, cube_22054ca59f3b2019</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">stars</span>))
 <span class="fu"><a href="reference/raster_cube.html">raster_cube</a></span>(<span class="no">L8.col</span>, <span class="no">v.overview</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/select_bands.html">select_bands</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"B04"</span>,<span class="st">"B05"</span>)) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/apply_pixel.html">apply_pixel</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"(B05-B04)/(B05+B04)"</span>), <span class="kw">names</span><span class="kw">=</span><span class="st">"NDVI"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/stars/man/st_as_stars.html">st_as_stars</a></span>() <span class="kw">-&gt;</span> <span class="no">y</span>
 <span class="no">y</span></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="co">## stars object with 3 dimensions and 1 attribute</span></a>
-<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="co">## attribute(s), summary of first 1e+05 cells:</span></a>
-<a class="sourceLine" id="cb24-3" data-line-number="3"><span class="co">##      NDVI       </span></a>
-<a class="sourceLine" id="cb24-4" data-line-number="4"><span class="co">##  Min.   :-0.56  </span></a>
-<a class="sourceLine" id="cb24-5" data-line-number="5"><span class="co">##  1st Qu.: 0.41  </span></a>
-<a class="sourceLine" id="cb24-6" data-line-number="6"><span class="co">##  Median : 0.72  </span></a>
-<a class="sourceLine" id="cb24-7" data-line-number="7"><span class="co">##  Mean   : 0.57  </span></a>
-<a class="sourceLine" id="cb24-8" data-line-number="8"><span class="co">##  3rd Qu.: 0.85  </span></a>
-<a class="sourceLine" id="cb24-9" data-line-number="9"><span class="co">##  Max.   : 0.89  </span></a>
-<a class="sourceLine" id="cb24-10" data-line-number="10"><span class="co">##  NA's   :79500  </span></a>
-<a class="sourceLine" id="cb24-11" data-line-number="11"><span class="co">## dimension(s):</span></a>
-<a class="sourceLine" id="cb24-12" data-line-number="12"><span class="co">##      from  to   offset delta                   refsys point</span></a>
-<a class="sourceLine" id="cb24-13" data-line-number="13"><span class="co">## x       1 783 -6582280  1000 WGS 84 / Pseudo-Mercator    NA</span></a>
-<a class="sourceLine" id="cb24-14" data-line-number="14"><span class="co">## y       1 559  -205014 -1000 WGS 84 / Pseudo-Mercator    NA</span></a>
-<a class="sourceLine" id="cb24-15" data-line-number="15"><span class="co">## time    1   7       NA    NA                  POSIXct FALSE</span></a>
-<a class="sourceLine" id="cb24-16" data-line-number="16"><span class="co">##                                                   values    </span></a>
-<a class="sourceLine" id="cb24-17" data-line-number="17"><span class="co">## x                                                   NULL [x]</span></a>
-<a class="sourceLine" id="cb24-18" data-line-number="18"><span class="co">## y                                                   NULL [y]</span></a>
-<a class="sourceLine" id="cb24-19" data-line-number="19"><span class="co">## time [2013-01-01,2014-01-01),...,[2019-01-01,2020-01-01)</span></a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co">## stars object with 3 dimensions and 1 attribute</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="co">## attribute(s), summary of first 1e+05 cells:</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="co">##      NDVI       </span></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="co">##  Min.   :-0.56  </span></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="co">##  1st Qu.: 0.41  </span></span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="co">##  Median : 0.72  </span></span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="co">##  Mean   : 0.57  </span></span>
+<span id="cb22-8"><a href="#cb22-8"></a><span class="co">##  3rd Qu.: 0.85  </span></span>
+<span id="cb22-9"><a href="#cb22-9"></a><span class="co">##  Max.   : 0.89  </span></span>
+<span id="cb22-10"><a href="#cb22-10"></a><span class="co">##  NA's   :79500  </span></span>
+<span id="cb22-11"><a href="#cb22-11"></a><span class="co">## dimension(s):</span></span>
+<span id="cb22-12"><a href="#cb22-12"></a><span class="co">##      from  to   offset delta                   refsys point</span></span>
+<span id="cb22-13"><a href="#cb22-13"></a><span class="co">## x       1 783 -6582280  1000 WGS 84 / Pseudo-Mercator    NA</span></span>
+<span id="cb22-14"><a href="#cb22-14"></a><span class="co">## y       1 559  -205014 -1000 WGS 84 / Pseudo-Mercator    NA</span></span>
+<span id="cb22-15"><a href="#cb22-15"></a><span class="co">## time    1   7       NA    NA                  POSIXct FALSE</span></span>
+<span id="cb22-16"><a href="#cb22-16"></a><span class="co">##                                                   values    </span></span>
+<span id="cb22-17"><a href="#cb22-17"></a><span class="co">## x                                                   NULL [x]</span></span>
+<span id="cb22-18"><a href="#cb22-18"></a><span class="co">## y                                                   NULL [y]</span></span>
+<span id="cb22-19"><a href="#cb22-19"></a><span class="co">## time [2013-01-01,2014-01-01),...,[2019-01-01,2020-01-01)</span></span></code></pre></div>
 <p>To reduce the size of exported data cubes, compression and packing (conversion of doubles to smaller integer types) are supported.</p>
 <p>If only specific time slices of a data cube are needed, <code><a href="reference/select_time.html">select_time()</a></code> can be called before plotting / exporting.</p>
-<div class="sourceCode" id="cb25"><pre class="r"><span class="fu"><a href="reference/raster_cube.html">raster_cube</a></span>(<span class="no">L8.col</span>, <span class="no">v.overview</span>) <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb23"><pre class="r"><span class="fu"><a href="reference/raster_cube.html">raster_cube</a></span>(<span class="no">L8.col</span>, <span class="no">v.overview</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/select_bands.html">select_bands</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"B04"</span>,<span class="st">"B05"</span>)) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/apply_pixel.html">apply_pixel</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"(B05-B04)/(B05+B04)"</span>), <span class="kw">names</span><span class="kw">=</span><span class="st">"NDVI"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/select_time.html">select_time</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"2015"</span>, <span class="st">"2018"</span>)) <span class="kw">%&gt;%</span>
@@ -306,7 +306,7 @@
 <h2 class="hasAnchor">
 <a href="#user-defined-functions" class="anchor"></a>User-defined functions</h2>
 <p>Users can pass custom R functions to <code><a href="reference/reduce_time.html">reduce_time()</a></code> and <code><a href="reference/apply_pixel.html">apply_pixel()</a></code>. Below, we derive a <em>greenest pixel composite</em> by returning RGB values from pixels with maximum NDVI for all pixel time-series.</p>
-<div class="sourceCode" id="cb26"><pre class="r"><span class="no">v.subarea.monthly</span> <span class="kw">=</span> <span class="fu"><a href="reference/cube_view.html">cube_view</a></span>(<span class="kw">view</span> <span class="kw">=</span> <span class="no">v.subarea.yearly</span>, <span class="kw">dt</span><span class="kw">=</span><span class="st">"P1M"</span>, <span class="kw">dx</span> <span class="kw">=</span> <span class="fl">100</span>, <span class="kw">dy</span> <span class="kw">=</span> <span class="fl">100</span>,
+<div class="sourceCode" id="cb24"><pre class="r"><span class="no">v.subarea.monthly</span> <span class="kw">=</span> <span class="fu"><a href="reference/cube_view.html">cube_view</a></span>(<span class="kw">view</span> <span class="kw">=</span> <span class="no">v.subarea.yearly</span>, <span class="kw">dt</span><span class="kw">=</span><span class="st">"P1M"</span>, <span class="kw">dx</span> <span class="kw">=</span> <span class="fl">100</span>, <span class="kw">dy</span> <span class="kw">=</span> <span class="fl">100</span>,
                               <span class="kw">extent</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">t0</span><span class="kw">=</span><span class="st">"2015-01"</span>, <span class="kw">t0</span><span class="kw">=</span><span class="st">"2018-12"</span>))
 <span class="fu"><a href="reference/raster_cube.html">raster_cube</a></span>(<span class="no">L8.col</span>, <span class="no">v.subarea.monthly</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/select_bands.html">select_bands</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"B02"</span>,<span class="st">"B03"</span>,<span class="st">"B04"</span>,<span class="st">"B05"</span>)) <span class="kw">%&gt;%</span>
@@ -323,53 +323,53 @@
 <a href="#extraction-of-pixels-time-series-and-summary-statistics-over-polygons" class="anchor"></a>Extraction of pixels, time series, and summary statistics over polygons</h2>
 <p>In many cases, one is interested in extracting sets of points, time series, or summary statistics over polygons, e.g., to generate training data for machine learning models. Package version 0.3 therefore introduces the functions <code><a href="reference/query_points.html">query_points()</a></code>, <code><a href="reference/query_timeseries.html">query_timeseries()</a></code>, and <code><a href="reference/zonal_statistics.html">zonal_statistics()</a></code>.</p>
 <p>Below, we randomly select 10 locations and query values of single data cube cells and complete time series.</p>
-<div class="sourceCode" id="cb27"><pre class="r"><span class="no">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">10</span>, <span class="no">v.overview</span>$<span class="no">space</span>$<span class="no">left</span>, <span class="no">v.overview</span>$<span class="no">space</span>$<span class="no">right</span>)
+<div class="sourceCode" id="cb25"><pre class="r"><span class="no">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">10</span>, <span class="no">v.overview</span>$<span class="no">space</span>$<span class="no">left</span>, <span class="no">v.overview</span>$<span class="no">space</span>$<span class="no">right</span>)
 <span class="no">y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fl">10</span>, <span class="no">v.overview</span>$<span class="no">space</span>$<span class="no">bottom</span>, <span class="no">v.overview</span>$<span class="no">space</span>$<span class="no">top</span>)
 <span class="no">t</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.character.html">as.character</a></span>(<span class="fl">2013</span>:<span class="fl">2019</span>), <span class="fl">10</span>, <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
 <span class="fu"><a href="reference/raster_cube.html">raster_cube</a></span>(<span class="no">L8.col</span>, <span class="no">v.overview</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/select_bands.html">select_bands</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"B04"</span>,<span class="st">"B05"</span>)) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/query_points.html">query_points</a></span>(<span class="no">x</span>,<span class="no">y</span>,<span class="no">t</span>, <span class="no">v.overview</span>$<span class="no">space</span>$<span class="no">srs</span>)</pre></div>
-<div class="sourceCode" id="cb28"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="co">##          B04      B05</span></a>
-<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="co">## 1   258.9018 3049.573</span></a>
-<a class="sourceLine" id="cb28-3" data-line-number="3"><span class="co">## 2        NaN      NaN</span></a>
-<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="co">## 3   230.3475 3329.359</span></a>
-<a class="sourceLine" id="cb28-5" data-line-number="5"><span class="co">## 4        NaN      NaN</span></a>
-<a class="sourceLine" id="cb28-6" data-line-number="6"><span class="co">## 5   334.1618 2269.766</span></a>
-<a class="sourceLine" id="cb28-7" data-line-number="7"><span class="co">## 6   209.3888 2907.231</span></a>
-<a class="sourceLine" id="cb28-8" data-line-number="8"><span class="co">## 7   256.0719 3300.665</span></a>
-<a class="sourceLine" id="cb28-9" data-line-number="9"><span class="co">## 8        NaN      NaN</span></a>
-<a class="sourceLine" id="cb28-10" data-line-number="10"><span class="co">## 9  7711.9037 7772.228</span></a>
-<a class="sourceLine" id="cb28-11" data-line-number="11"><span class="co">## 10  366.2021 3046.725</span></a></code></pre></div>
-<div class="sourceCode" id="cb29"><pre class="r"><span class="fu"><a href="reference/raster_cube.html">raster_cube</a></span>(<span class="no">L8.col</span>, <span class="no">v.overview</span>) <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb26"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co">##         B04      B05</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="co">## 1  285.1461 3340.956</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="co">## 2       NaN      NaN</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="co">## 3  555.7998 3584.006</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="co">## 4       NaN      NaN</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a><span class="co">## 5       NaN      NaN</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a><span class="co">## 6  636.7866 2886.451</span></span>
+<span id="cb26-8"><a href="#cb26-8"></a><span class="co">## 7       NaN      NaN</span></span>
+<span id="cb26-9"><a href="#cb26-9"></a><span class="co">## 8  432.9606 2984.170</span></span>
+<span id="cb26-10"><a href="#cb26-10"></a><span class="co">## 9  594.7715 3538.645</span></span>
+<span id="cb26-11"><a href="#cb26-11"></a><span class="co">## 10      NaN      NaN</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="r"><span class="fu"><a href="reference/raster_cube.html">raster_cube</a></span>(<span class="no">L8.col</span>, <span class="no">v.overview</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/select_bands.html">select_bands</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"B04"</span>,<span class="st">"B05"</span>)) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/query_timeseries.html">query_timeseries</a></span>(<span class="no">x</span>, <span class="no">y</span>, <span class="no">v.overview</span>$<span class="no">space</span>$<span class="no">srs</span>)</pre></div>
-<div class="sourceCode" id="cb30"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="co">## $B04</span></a>
-<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="co">##         2013     2014     2015      2016     2017     2018      2019</span></a>
-<a class="sourceLine" id="cb30-3" data-line-number="3"><span class="co">## 1   396.5433 259.6805 208.1757  217.6962 176.3635 258.9018  179.4177</span></a>
-<a class="sourceLine" id="cb30-4" data-line-number="4"><span class="co">## 2   248.1954 177.3339 320.5452  228.9156 393.0006      NaN       NaN</span></a>
-<a class="sourceLine" id="cb30-5" data-line-number="5"><span class="co">## 3   325.6795 230.3475 185.0954  204.6250 246.0916 190.0207  182.8453</span></a>
-<a class="sourceLine" id="cb30-6" data-line-number="6"><span class="co">## 4        NaN      NaN      NaN       NaN      NaN      NaN       NaN</span></a>
-<a class="sourceLine" id="cb30-7" data-line-number="7"><span class="co">## 5        NaN 374.8409 447.1408  329.9995 334.1618 392.9118       NaN</span></a>
-<a class="sourceLine" id="cb30-8" data-line-number="8"><span class="co">## 6        NaN 209.3888      NaN 7094.2514 151.5665 339.1125  175.3885</span></a>
-<a class="sourceLine" id="cb30-9" data-line-number="9"><span class="co">## 7  1100.5899 256.0719 277.2271  371.1198 260.9517 332.0111  625.5913</span></a>
-<a class="sourceLine" id="cb30-10" data-line-number="10"><span class="co">## 8        NaN      NaN      NaN       NaN      NaN      NaN       NaN</span></a>
-<a class="sourceLine" id="cb30-11" data-line-number="11"><span class="co">## 9   264.0742 247.9711 259.2477  232.0077 276.2899 250.5457 7711.9037</span></a>
-<a class="sourceLine" id="cb30-12" data-line-number="12"><span class="co">## 10  366.2021 216.2955 260.9449  185.2800 249.2565 216.7119  591.2057</span></a>
-<a class="sourceLine" id="cb30-13" data-line-number="13"><span class="co">## </span></a>
-<a class="sourceLine" id="cb30-14" data-line-number="14"><span class="co">## $B05</span></a>
-<a class="sourceLine" id="cb30-15" data-line-number="15"><span class="co">##        2013     2014     2015     2016     2017     2018     2019</span></a>
-<a class="sourceLine" id="cb30-16" data-line-number="16"><span class="co">## 1  2892.671 3244.639 3145.802 3010.066 3086.547 3049.573 3020.965</span></a>
-<a class="sourceLine" id="cb30-17" data-line-number="17"><span class="co">## 2  1696.388 1417.797 1799.151 1906.917 2014.631      NaN      NaN</span></a>
-<a class="sourceLine" id="cb30-18" data-line-number="18"><span class="co">## 3  2919.731 3329.359 3109.554 3033.240 3249.752 3134.065 3064.439</span></a>
-<a class="sourceLine" id="cb30-19" data-line-number="19"><span class="co">## 4       NaN      NaN      NaN      NaN      NaN      NaN      NaN</span></a>
-<a class="sourceLine" id="cb30-20" data-line-number="20"><span class="co">## 5       NaN 2134.138 2906.735 2023.735 2269.766 3120.462      NaN</span></a>
-<a class="sourceLine" id="cb30-21" data-line-number="21"><span class="co">## 6       NaN 2907.231      NaN 7602.566 2832.440 2856.486 2816.193</span></a>
-<a class="sourceLine" id="cb30-22" data-line-number="22"><span class="co">## 7  2598.048 3300.665 3076.471 3040.468 3252.881 3469.783 3268.905</span></a>
-<a class="sourceLine" id="cb30-23" data-line-number="23"><span class="co">## 8       NaN      NaN      NaN      NaN      NaN      NaN      NaN</span></a>
-<a class="sourceLine" id="cb30-24" data-line-number="24"><span class="co">## 9  3189.172 3181.051 3095.615 2922.048 3204.925 2840.464 7772.228</span></a>
-<a class="sourceLine" id="cb30-25" data-line-number="25"><span class="co">## 10 3046.725 3177.317 3091.082 3058.439 3090.122 3062.155 3390.703</span></a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co">## $B04</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="co">##        2013     2014     2015      2016     2017     2018     2019</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a><span class="co">## 1       NaN 285.1461      NaN 3418.5358 305.4599 332.0992 323.7041</span></span>
+<span id="cb28-4"><a href="#cb28-4"></a><span class="co">## 2       NaN      NaN      NaN       NaN      NaN      NaN      NaN</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a><span class="co">## 3  461.5016 585.7743 555.8947  555.7998 478.8317 593.2361 458.7815</span></span>
+<span id="cb28-6"><a href="#cb28-6"></a><span class="co">## 4       NaN 206.4800 231.0744  248.3554 243.5485 190.8519      NaN</span></span>
+<span id="cb28-7"><a href="#cb28-7"></a><span class="co">## 5       NaN      NaN      NaN       NaN      NaN      NaN      NaN</span></span>
+<span id="cb28-8"><a href="#cb28-8"></a><span class="co">## 6       NaN 276.2733 319.7856 1789.1146 636.7866 735.5462      NaN</span></span>
+<span id="cb28-9"><a href="#cb28-9"></a><span class="co">## 7       NaN      NaN      NaN       NaN      NaN      NaN      NaN</span></span>
+<span id="cb28-10"><a href="#cb28-10"></a><span class="co">## 8       NaN 212.6797 266.0789  282.9415 432.9606 226.9705      NaN</span></span>
+<span id="cb28-11"><a href="#cb28-11"></a><span class="co">## 9  181.8807 207.3071 594.7715  483.4942 214.6374 212.3614 191.6095</span></span>
+<span id="cb28-12"><a href="#cb28-12"></a><span class="co">## 10      NaN      NaN      NaN       NaN      NaN      NaN      NaN</span></span>
+<span id="cb28-13"><a href="#cb28-13"></a><span class="co">## </span></span>
+<span id="cb28-14"><a href="#cb28-14"></a><span class="co">## $B05</span></span>
+<span id="cb28-15"><a href="#cb28-15"></a><span class="co">##        2013     2014     2015     2016     2017     2018     2019</span></span>
+<span id="cb28-16"><a href="#cb28-16"></a><span class="co">## 1       NaN 3340.956      NaN 4983.803 3249.180 3223.194 3143.337</span></span>
+<span id="cb28-17"><a href="#cb28-17"></a><span class="co">## 2       NaN      NaN      NaN      NaN      NaN      NaN      NaN</span></span>
+<span id="cb28-18"><a href="#cb28-18"></a><span class="co">## 3  3180.279 3469.603 3431.100 3584.006 3366.193 3782.534 3470.040</span></span>
+<span id="cb28-19"><a href="#cb28-19"></a><span class="co">## 4       NaN 3139.709 3095.002 3085.015 3212.694 3051.408      NaN</span></span>
+<span id="cb28-20"><a href="#cb28-20"></a><span class="co">## 5       NaN      NaN      NaN      NaN      NaN      NaN      NaN</span></span>
+<span id="cb28-21"><a href="#cb28-21"></a><span class="co">## 6       NaN 2936.051 3494.276 3758.901 2886.451 4072.139      NaN</span></span>
+<span id="cb28-22"><a href="#cb28-22"></a><span class="co">## 7       NaN      NaN      NaN      NaN      NaN      NaN      NaN</span></span>
+<span id="cb28-23"><a href="#cb28-23"></a><span class="co">## 8       NaN 3240.558 3421.281 3254.259 2984.170 3477.211      NaN</span></span>
+<span id="cb28-24"><a href="#cb28-24"></a><span class="co">## 9  2894.058 3145.320 3538.645 3200.499 3331.730 2929.747 3009.248</span></span>
+<span id="cb28-25"><a href="#cb28-25"></a><span class="co">## 10      NaN      NaN      NaN      NaN      NaN      NaN      NaN</span></span></code></pre></div>
 <p>To compute time series of summary statistics over spatial polygons, we need to specify polygon geometries (e.g., as an <code>sf</code> object) and specify one or more statistics that we are interested in, similar as we can do in <code><a href="reference/reduce_time.html">reduce_time()</a></code> or <code><a href="reference/reduce_space.html">reduce_space()</a></code>. In the following, we use the example Landsat dataset (reduced resolution) provided with the package and compute median NDVI within some administrative regions in New York City. The result is a vector data cube in a GeoPackage file that can be further processed and plotted by the <code>stars</code> package.</p>
-<div class="sourceCode" id="cb31"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">sf</span>))
+<div class="sourceCode" id="cb29"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">sf</span>))
 
 <span class="no">L8_files</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"L8NY18"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"gdalcubes"</span>),
                        <span class="st">".TIF"</span>, <span class="kw">recursive</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">full.names</span> <span class="kw">=</span> <span class="fl">TRUE</span>)

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Select bands of a data cube — select_bands • gdalcubes</title>
+<title>Apply a function over (multi-band) pixel time series — apply_time • gdalcubes</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,9 @@
 
 
 
-<meta property="og:title" content="Select bands of a data cube — select_bands" />
-<meta property="og:description" content="Create a proxy data cube, which selects specific bands of a data cube. The resulting cube
-will drop any other bands." />
+<meta property="og:title" content="Apply a function over (multi-band) pixel time series — apply_time" />
+<meta property="og:description" content="This generic function applies a function on pixel time series of a data cube, an R array, or other classes if implemented.
+The resulting object is expected to have the same spatial and temporal shape as the input, i.e., no reduction is performed." />
 
 
 
@@ -124,42 +124,42 @@ will drop any other bands." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Select bands of a data cube</h1>
-    <small class="dont-index">Source: <a href='https://github.com/appelmar/gdalcubes_R/blob/master/R/select_bands.R'><code>R/select_bands.R</code></a></small>
-    <div class="hidden name"><code>select_bands.Rd</code></div>
+    <h1>Apply a function over (multi-band) pixel time series</h1>
+    <small class="dont-index">Source: <a href='https://github.com/appelmar/gdalcubes_R/blob/master/R/apply_time.R'><code>R/apply_time.R</code></a></small>
+    <div class="hidden name"><code>apply_time.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create a proxy data cube, which selects specific bands of a data cube. The resulting cube
-will drop any other bands.</p>
+    <p>This generic function applies a function on pixel time series of a data cube, an R array, or other classes if implemented.
+The resulting object is expected to have the same spatial and temporal shape as the input, i.e., no reduction is performed.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>select_bands</span>(<span class='no'>cube</span>, <span class='no'>bands</span>)</pre>
+    <pre class="usage"><span class='fu'>apply_time</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>cube</th>
-      <td><p>source data cube</p></td>
+      <th>x</th>
+      <td><p>input data</p></td>
     </tr>
     <tr>
-      <th>bands</th>
-      <td><p>character vector with band names</p></td>
+      <th>...</th>
+      <td><p>additional arguments passed to method implementations</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>proxy data cube object</p>
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+    <p>return value and type depend on the class of x</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>This function returns a proxy object, i.e., it will not start any computations besides deriving the shape of the result.</p>
-<p>For performance reasons, <code>select_bands</code> should always be called directly on a cube created with <code><a href='raster_cube.html'>raster_cube</a></code> and 
-drop all unneded bands. This allows to reduce RasterIO and warp operations in GDAL.</p>
+    <div class='dont-index'><p><code><a href='apply_time.cube.html'>apply_time.cube</a></code></p>
+<p><code><a href='apply_time.array.html'>apply_time.array</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># create image collection from example Landsat data only </span>
+    <pre class="examples"><div class='input'><span class='co'># 1. input is data cube</span>
+<span class='co'># create image collection from example Landsat data only </span>
 <span class='co'># if not already done in other examples</span>
 <span class='kw'>if</span> (!<span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.exists</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>"L8.db"</span>))) {
   <span class='no'>L8_files</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"L8NY18"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"gdalcubes"</span>),
@@ -169,26 +169,42 @@ drop all unneded bands. This allows to reduce RasterIO and warp operations in GD
 
 <span class='no'>L8.col</span> <span class='kw'>=</span> <span class='fu'><a href='image_collection.html'>image_collection</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>"L8.db"</span>))
 <span class='no'>v</span> <span class='kw'>=</span> <span class='fu'><a href='cube_view.html'>cube_view</a></span>(<span class='kw'>extent</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>left</span><span class='kw'>=</span><span class='fl'>388941.2</span>, <span class='kw'>right</span><span class='kw'>=</span><span class='fl'>766552.4</span>,
-              <span class='kw'>bottom</span><span class='kw'>=</span><span class='fl'>4345299</span>, <span class='kw'>top</span><span class='kw'>=</span><span class='fl'>4744931</span>, <span class='kw'>t0</span><span class='kw'>=</span><span class='st'>"2018-04"</span>, <span class='kw'>t1</span><span class='kw'>=</span><span class='st'>"2018-07"</span>),
+              <span class='kw'>bottom</span><span class='kw'>=</span><span class='fl'>4345299</span>, <span class='kw'>top</span><span class='kw'>=</span><span class='fl'>4744931</span>, <span class='kw'>t0</span><span class='kw'>=</span><span class='st'>"2018-01"</span>, <span class='kw'>t1</span><span class='kw'>=</span><span class='st'>"2018-06"</span>),
               <span class='kw'>srs</span><span class='kw'>=</span><span class='st'>"EPSG:32618"</span>, <span class='kw'>nx</span> <span class='kw'>=</span> <span class='fl'>497</span>, <span class='kw'>ny</span><span class='kw'>=</span><span class='fl'>526</span>, <span class='kw'>dt</span><span class='kw'>=</span><span class='st'>"P1M"</span>)
 <span class='no'>L8.cube</span> <span class='kw'>=</span> <span class='fu'><a href='raster_cube.html'>raster_cube</a></span>(<span class='no'>L8.col</span>, <span class='no'>v</span>)
-<span class='no'>L8.rgb</span> <span class='kw'>=</span> <span class='fu'>select_bands</span>(<span class='no'>L8.cube</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"B02"</span>, <span class='st'>"B03"</span>, <span class='st'>"B04"</span>))
-<span class='no'>L8.rgb</span></div><div class='output co'>#&gt; A GDAL data cube proxy object
+<span class='no'>L8.cube</span> <span class='kw'>=</span> <span class='fu'><a href='select_bands.html'>select_bands</a></span>(<span class='no'>L8.cube</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"B04"</span>, <span class='st'>"B05"</span>))
+<span class='no'>L8.ndvi</span> <span class='kw'>=</span> <span class='fu'><a href='apply_pixel.html'>apply_pixel</a></span>(<span class='no'>L8.cube</span>, <span class='st'>"(B05-B04)/(B05+B04)"</span>, <span class='st'>"NDVI"</span>)
+
+<span class='co'># Apply a user defined R function</span>
+<span class='fu'>apply_time</span>(<span class='no'>L8.ndvi</span>, <span class='kw'>names</span><span class='kw'>=</span><span class='st'>"NDVI_residuals"</span>,
+   <span class='kw'>FUN</span><span class='kw'>=</span><span class='kw'>function</span>(<span class='no'>x</span>) {
+      <span class='no'>y</span> <span class='kw'>=</span> <span class='no'>x</span>[<span class='st'>"NDVI"</span>,]
+      <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/is.finite.html'>is.finite</a></span>(<span class='no'>y</span>)) <span class='kw'>&lt;</span> <span class='fl'>3</span>) {
+         <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>NA</span>,<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>x</span>)))
+      }
+      <span class='no'>t</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>x</span>)
+      <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>y</span> ~ <span class='no'>t</span>)) -  <span class='no'>x</span>[<span class='st'>"NDVI"</span>,])})</div><div class='output co'>#&gt; A GDAL data cube proxy object
 #&gt; 
 #&gt; Dimensions:
 #&gt;        low     high count       pixel_size chunk_size
-#&gt; t  2018-04  2018-07     4              P1M          1
+#&gt; t  2018-01  2018-06     6              P1M          6
 #&gt; y  4345299  4744931   526 759.756653992395        256
 #&gt; x 388941.2 766552.4   497 759.781086519115        256
 #&gt; 
 #&gt; Bands:
-#&gt;   name offset scale nodata unit
-#&gt; 1  B02      0     1    NaN     
-#&gt; 2  B03      0     1    NaN     
-#&gt; 3  B04      0     1    NaN     
-#&gt; </div><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>L8.rgb</span>, <span class='kw'>rgb</span><span class='kw'>=</span><span class='fl'>3</span>:<span class='fl'>1</span>)</div><div class='img'><img src='select_bands-1.png' alt='' width='700' height='433' /></div><div class='input'># }
-
+#&gt;             name offset scale nodata unit
+#&gt; 1 NDVI_residuals      0     1    NaN     
+#&gt; </div><div class='input'>
+<span class='co'># 2. input is array</span>
+<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>16</span>,<span class='fl'>32</span>,<span class='fl'>32</span>)
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/array.html'>array</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/prod.html'>prod</a></span>(<span class='no'>d</span>)), <span class='no'>d</span>)
+<span class='no'>z</span> <span class='kw'>&lt;-</span> <span class='fu'>apply_time</span>(<span class='no'>x</span>, <span class='kw'>function</span>(<span class='no'>v</span>) {
+  <span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fl'>NA</span>, <span class='kw'>ncol</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>v</span>), <span class='kw'>nrow</span><span class='kw'>=</span><span class='fl'>2</span>)
+  <span class='no'>y</span>[<span class='fl'>1</span>,] <span class='kw'>=</span> (<span class='no'>v</span>[<span class='fl'>1</span>,] + <span class='no'>v</span>[<span class='fl'>2</span>,]) / <span class='fl'>2</span>
+  <span class='no'>y</span>[<span class='fl'>2</span>,] <span class='kw'>=</span> (<span class='no'>v</span>[<span class='fl'>3</span>,] + <span class='no'>v</span>[<span class='fl'>4</span>,]) / <span class='fl'>2</span>
+  <span class='no'>y</span>
+})
+<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='no'>z</span>)</div><div class='output co'>#&gt; [1]  2 16 32 32</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gdalcubes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.9999</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -158,8 +158,10 @@
   <span class='no'>L8_files</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"L8NY18"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"gdalcubes"</span>),
                          <span class='st'>".TIF"</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>full.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
   <span class='fu'><a href='create_image_collection.html'>create_image_collection</a></span>(<span class='no'>L8_files</span>, <span class='st'>"L8_L1TP"</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>"L8.db"</span>))
-}</div><div class='output co'>#&gt; <span class='error'>Error in libgdalcubes_create_image_collection_from_format(files, format,     out_file, unroll_archives): ERROR in collection_format::load_file(): image collection format file does not exist.</span></div><div class='input'>
-<span class='no'>L8.col</span> <span class='kw'>=</span> <span class='fu'><a href='image_collection.html'>image_collection</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>"L8.db"</span>))</div><div class='output co'>#&gt; <span class='error'>Error in image_collection(file.path(tempdir(), "L8.db")): file.exists(path) is not TRUE</span></div><div class='input'><span class='no'>v</span> <span class='kw'>=</span> <span class='fu'><a href='cube_view.html'>cube_view</a></span>(<span class='kw'>extent</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>left</span><span class='kw'>=</span><span class='fl'>388941.2</span>, <span class='kw'>right</span><span class='kw'>=</span><span class='fl'>766552.4</span>,
+}
+
+<span class='no'>L8.col</span> <span class='kw'>=</span> <span class='fu'><a href='image_collection.html'>image_collection</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>"L8.db"</span>))
+<span class='no'>v</span> <span class='kw'>=</span> <span class='fu'><a href='cube_view.html'>cube_view</a></span>(<span class='kw'>extent</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>left</span><span class='kw'>=</span><span class='fl'>388941.2</span>, <span class='kw'>right</span><span class='kw'>=</span><span class='fl'>766552.4</span>,
               <span class='kw'>bottom</span><span class='kw'>=</span><span class='fl'>4345299</span>, <span class='kw'>top</span><span class='kw'>=</span><span class='fl'>4744931</span>, <span class='kw'>t0</span><span class='kw'>=</span><span class='st'>"2018-04"</span>, <span class='kw'>t1</span><span class='kw'>=</span><span class='st'>"2018-06"</span>),
               <span class='kw'>srs</span><span class='kw'>=</span><span class='st'>"EPSG:32618"</span>, <span class='kw'>nx</span> <span class='kw'>=</span> <span class='fl'>497</span>, <span class='kw'>ny</span><span class='kw'>=</span><span class='fl'>526</span>, <span class='kw'>dt</span><span class='kw'>=</span><span class='st'>"P1M"</span>)
 <span class='fu'>dimension_bounds</span>(<span class='fu'><a href='raster_cube.html'>raster_cube</a></span>(<span class='no'>L8.col</span>, <span class='no'>v</span>))</div><div class='output co'>#&gt; $t

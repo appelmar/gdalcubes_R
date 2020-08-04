@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gdalcubes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.9999</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -126,47 +126,78 @@
       <small>Source: <a href='https://github.com/appelmar/gdalcubes_R/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="gdalcubes-0-2-9999" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.9999">
-<a href="#gdalcubes-0-2-9999" class="anchor"></a>gdalcubes 0.2.9999<small> Unreleased </small>
+    <div id="gdalcubes-030-2020-08-04" class="section level1">
+<h1 class="page-header" data-toc-text="0.3.0">
+<a href="#gdalcubes-030-2020-08-04" class="anchor"></a>gdalcubes 0.3.0 (2020-08-04)<small> Unreleased </small>
 </h1>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New Features</h2>
 <ul>
-<li>optional global SRS definition in collection formats</li>
-<li>new collection format for daily 0.25° AVHRR Optimum Interpolation Sea Surface Temperature</li>
-<li>new <code><a href="../reference/zonal_statistics.html">zonal_statistics()</a></code> function to compute summary statistics of data cubes over polygons</li>
-<li>add support for image collections without collection format in <code><a href="../reference/create_image_collection.html">create_image_collection()</a></code>
+<li>Compute summary statistics of data cubes over polygons with <code><a href="../reference/zonal_statistics.html">zonal_statistics()</a></code>
 </li>
-<li>new <code><a href="../reference/query_timeseries.html">query_timeseries()</a></code> function to extract time series at irregular spatial points</li>
-<li>new <code><a href="../reference/select_time.html">select_time()</a></code> function to create data cubes with irregular / labeled time dimension</li>
-<li>new <code><a href="../reference/filter_geom.html">filter_geom()</a></code> function to filter pixels by a spatial polygon</li>
-<li>remove <code>reduce()</code> function</li>
-<li>remove <code>cube</code> argument in <code>cube_view</code> function</li>
-<li>conversion to stars objects with <code>st_as_stars()</code>
+<li>Extracts time series at irregular spatial points with <code><a href="../reference/query_timeseries.html">query_timeseries()</a></code>
 </li>
-<li>fix CRS metadata in produced netCDF files</li>
+<li>Time dimension may ow be irregular / labeled after selecting slices with the new <code><a href="../reference/select_time.html">select_time()</a></code> function</li>
+<li>Filter pixels of a data cube by a spatial polygon with <code><a href="../reference/filter_geom.html">filter_geom()</a></code>
+</li>
+<li>Apply an R function on time series without reduction using <code><a href="../reference/apply_time.html">apply_time()</a></code>
+</li>
+<li>Batch format conversion of images in a collection with <code><a href="../reference/translate_cog.html">translate_cog()</a></code> and <code><a href="../reference/translate_gtiff.html">translate_gtiff()</a></code>
+</li>
 </ul>
 </div>
-    <div id="gdalcubes-0-2-5-2020-05-17" class="section level1">
+<div id="minor-improvements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-improvements" class="anchor"></a>Minor improvements</h2>
+<ul>
+<li>conversion to stars objects with <code>st_as_stars()</code>
+</li>
+<li>add support for image collections without collection format in <code><a href="../reference/create_image_collection.html">create_image_collection()</a></code>
+</li>
+<li>optional global SRS definition in collection formats</li>
+<li>default chunk size is now (t,y,x) = (1,256,256)</li>
+<li>remove <code>reduce()</code> function</li>
+<li>remove <code>cube</code> argument in <code>cube_view</code> function</li>
+<li>new collection format for daily 0.25° AVHRR Optimum Interpolation Sea Surface Temperature</li>
+<li>new collection formats for ESA CCI soil moisture products</li>
+<li>new collection format for daily precipitation observations from GPM / IMERG</li>
+<li>new collection format for MODIS MOD09GA (aqua and terra)</li>
+<li>add <code>na.color</code> argument in <code><a href="../reference/plot.cube.html">plot.cube()</a></code>
+</li>
+</ul>
+</div>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<ul>
+<li>fix CRS metadata in produced netCDF files<br>
+</li>
+<li>fix multithreading locking issues with GDAL 3</li>
+</ul>
+</div>
+</div>
+    <div id="gdalcubes-025-2020-05-17" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.5">
-<a href="#gdalcubes-0-2-5-2020-05-17" class="anchor"></a>gdalcubes 0.2.5 (2020-05-17)<small> 2020-05-17 </small>
+<a href="#gdalcubes-025-2020-05-17" class="anchor"></a>gdalcubes 0.2.5 (2020-05-17)<small> 2020-05-17 </small>
 </h1>
 <ul>
 <li>fixed compiler warnings on CRAN</li>
 <li>temporarily removed <code>as_stars()</code>, will be added again in 0.3</li>
 </ul>
 </div>
-    <div id="gdalcubes-0-2-4-2020-02-02" class="section level1">
+    <div id="gdalcubes-024-2020-02-02" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.4">
-<a href="#gdalcubes-0-2-4-2020-02-02" class="anchor"></a>gdalcubes 0.2.4 (2020-02-02)<small> 2020-02-02 </small>
+<a href="#gdalcubes-024-2020-02-02" class="anchor"></a>gdalcubes 0.2.4 (2020-02-02)<small> 2020-02-02 </small>
 </h1>
 <ul>
 <li>fixed axis order issues with GDAL3 and PROJ6</li>
 <li>fixed compiler warnings with GDAL3</li>
 </ul>
 </div>
-    <div id="gdalcubes-0-2-3-2019-10-21" class="section level1">
+    <div id="gdalcubes-023-2019-10-21" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.3">
-<a href="#gdalcubes-0-2-3-2019-10-21" class="anchor"></a>gdalcubes 0.2.3 (2019-10-21)<small> 2019-10-21 </small>
+<a href="#gdalcubes-023-2019-10-21" class="anchor"></a>gdalcubes 0.2.3 (2019-10-21)<small> 2019-10-21 </small>
 </h1>
 <ul>
 <li>fixed clang compiler warnings</li>
@@ -174,9 +205,9 @@
 <li>new collection formats MxD14A2 and MxD13A2</li>
 </ul>
 </div>
-    <div id="gdalcubes-0-2-2-2019-10-15" class="section level1">
+    <div id="gdalcubes-022-2019-10-15" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.2">
-<a href="#gdalcubes-0-2-2-2019-10-15" class="anchor"></a>gdalcubes 0.2.2 (2019-10-15)<small> 2019-10-15 </small>
+<a href="#gdalcubes-022-2019-10-15" class="anchor"></a>gdalcubes 0.2.2 (2019-10-15)<small> 2019-10-15 </small>
 </h1>
 <ul>
 <li>support for GDAL subdatasets in collection format</li>
@@ -185,9 +216,9 @@
 <li>add <code><a href="../reference/query_points.html">query_points()</a></code> to query data cube values at irregular spatiotemporal points</li>
 </ul>
 </div>
-    <div id="gdalcubes-0-2-1-2019-08-21" class="section level1">
+    <div id="gdalcubes-021-2019-08-21" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.1">
-<a href="#gdalcubes-0-2-1-2019-08-21" class="anchor"></a>gdalcubes 0.2.1 (2019-08-21)<small> 2019-08-21 </small>
+<a href="#gdalcubes-021-2019-08-21" class="anchor"></a>gdalcubes 0.2.1 (2019-08-21)<small> 2019-08-21 </small>
 </h1>
 <ul>
 <li>new collection format for PlanetScope data</li>
@@ -195,13 +226,13 @@
 <li>fixed mean aggregation</li>
 </ul>
 </div>
-    <div id="gdalcubes-0-2-0-2019-08-07" class="section level1">
+    <div id="gdalcubes-020-2019-08-07" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.0">
-<a href="#gdalcubes-0-2-0-2019-08-07" class="anchor"></a>gdalcubes 0.2.0 (2019-08-07)<small> 2019-08-08 </small>
+<a href="#gdalcubes-020-2019-08-07" class="anchor"></a>gdalcubes 0.2.0 (2019-08-07)<small> 2019-08-08 </small>
 </h1>
-<div id="new-features" class="section level2">
+<div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New Features</h2>
+<a href="#new-features-1" class="anchor"></a>New Features</h2>
 <ul>
 <li>add <code><a href="../reference/animate.html">animate()</a></code> function to create data cube time series animations</li>
 <li>apply mask bands on pixel values during the construction of the data cube, see <code><a href="../reference/image_mask.html">?image_mask</a></code>
@@ -217,9 +248,9 @@
 <li>new function <code><a href="../reference/add_images.html">add_images()</a></code> adds images to an existing image collection</li>
 </ul>
 </div>
-<div id="minor-improvements" class="section level2">
+<div id="minor-improvements-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-improvements" class="anchor"></a>Minor improvements</h2>
+<a href="#minor-improvements-1" class="anchor"></a>Minor improvements</h2>
 <ul>
 <li>rename <code>filter_predicate()</code> -&gt; <code><a href="../reference/filter_pixel.html">filter_pixel()</a></code>
 </li>
@@ -237,9 +268,9 @@
 <code><a href="../reference/write_ncdf.html">write_ncdf()</a></code> and <code><a href="../reference/write_tif.html">write_tif()</a></code> return created files as character vectors.</li>
 </ul>
 </div>
-<div id="bug-fixes" class="section level2">
+<div id="bug-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>fix windows source compilation on CRAN</li>
 <li>bands of multiband files are now read in correct order</li>
@@ -247,9 +278,9 @@
 </ul>
 </div>
 </div>
-    <div id="gdalcubes-0-1-0-2019-05-15" class="section level1">
+    <div id="gdalcubes-010-2019-05-15" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.0">
-<a href="#gdalcubes-0-1-0-2019-05-15" class="anchor"></a>gdalcubes 0.1.0 (2019-05-15)<small> 2019-05-24 </small>
+<a href="#gdalcubes-010-2019-05-15" class="anchor"></a>gdalcubes 0.1.0 (2019-05-15)<small> 2019-05-24 </small>
 </h1>
 <ul>
 <li>First release</li>

@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gdalcubes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.9999</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -181,6 +181,24 @@
           <p><code><a href="apply_pixel.cube.html">apply_pixel(<i>&lt;cube&gt;</i>)</a></code> </p>
         </td>
         <td><p>Apply arithmetic expressions over all pixels of a data cube</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="apply_time.html">apply_time()</a></code> </p>
+        </td>
+        <td><p>Apply a function over (multi-band) pixel time series</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="apply_time.array.html">apply_time(<i>&lt;array&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Apply a function over pixel time series in a four-dimensional (band, time, y, x) array</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="apply_time.cube.html">apply_time(<i>&lt;cube&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Apply a user-defined R function over (multi-band) pixel time series</p></td>
       </tr><tr>
         
         <td>
@@ -456,7 +474,8 @@
         <td>
           <p><code><a href="reduce_space.array.html">reduce_space(<i>&lt;array&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Apply a function over space and bands in a four-dimensional (band, time, y, x) array</p></td>
+        <td><p>Apply a function over space and bands in a four-dimensional (band, time, y, x) array and reduce
+spatial dimensions</p></td>
       </tr><tr>
         
         <td>
@@ -474,7 +493,7 @@
         <td>
           <p><code><a href="reduce_time.array.html">reduce_time(<i>&lt;array&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Apply a function over time and bands in a four-dimensional (band, time, y, x) array</p></td>
+        <td><p>Apply a function over time and bands in a four-dimensional (band, time, y, x) array and reduce time dimension</p></td>
       </tr><tr>
         
         <td>
@@ -511,6 +530,18 @@
           <p><code><a href="st_as_stars.cube.html">st_as_stars.cube()</a></code> </p>
         </td>
         <td><p>Coerce gdalcubes object into a stars object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="translate_cog.html">translate_cog()</a></code> </p>
+        </td>
+        <td><p>Convert complete image collections to cloud-optimized GeoTIFFs</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="translate_gtiff.html">translate_gtiff()</a></code> </p>
+        </td>
+        <td><p>Convert complete image collections to cloud-optimized GeoTIFFs</p></td>
       </tr><tr>
         
         <td>

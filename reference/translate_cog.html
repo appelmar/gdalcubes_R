@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Select bands of a data cube — select_bands • gdalcubes</title>
+<title>Convert complete image collections to cloud-optimized GeoTIFFs — translate_cog • gdalcubes</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,10 @@
 
 
 
-<meta property="og:title" content="Select bands of a data cube — select_bands" />
-<meta property="og:description" content="Create a proxy data cube, which selects specific bands of a data cube. The resulting cube
-will drop any other bands." />
+<meta property="og:title" content="Convert complete image collections to cloud-optimized GeoTIFFs — translate_cog" />
+<meta property="og:description" content="This function translates all images of a gdalcubes image collection to cloud-optimized GeoTIFF files.
+The output contains converted imagery as an additional copy (original files are not deleted) and
+a new image collection file." />
 
 
 
@@ -124,39 +125,52 @@ will drop any other bands." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Select bands of a data cube</h1>
-    <small class="dont-index">Source: <a href='https://github.com/appelmar/gdalcubes_R/blob/master/R/select_bands.R'><code>R/select_bands.R</code></a></small>
-    <div class="hidden name"><code>select_bands.Rd</code></div>
+    <h1>Convert complete image collections to cloud-optimized GeoTIFFs</h1>
+    <small class="dont-index">Source: <a href='https://github.com/appelmar/gdalcubes_R/blob/master/R/image_collection_ops.R'><code>R/image_collection_ops.R</code></a></small>
+    <div class="hidden name"><code>translate_cog.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create a proxy data cube, which selects specific bands of a data cube. The resulting cube
-will drop any other bands.</p>
+    <p>This function translates all images of a gdalcubes image collection to cloud-optimized GeoTIFF files.
+The output contains converted imagery as an additional copy (original files are not deleted) and
+a new image collection file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>select_bands</span>(<span class='no'>cube</span>, <span class='no'>bands</span>)</pre>
+    <pre class="usage"><span class='fu'>translate_cog</span>(
+  <span class='no'>collection</span>,
+  <span class='kw'>target_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"image_collection_"</span>),
+  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>creation_options</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"BLOCKSIZE=256"</span>, <span class='st'>"COMPRESS=DEFLTE"</span>, <span class='st'>"LEVEL=1"</span>,
+    <span class='st'>"RESAMPLING=CUBIC"</span>)
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>cube</th>
-      <td><p>source data cube</p></td>
+      <th>collection</th>
+      <td><p>path to an existing image collection file</p></td>
     </tr>
     <tr>
-      <th>bands</th>
-      <td><p>character vector with band names</p></td>
+      <th>target_dir</th>
+      <td><p>directory where the output will be stored, will be created if necessary</p></td>
+    </tr>
+    <tr>
+      <th>overwrite</th>
+      <td><p>logical; if TRUE existing files will be overwritten</p></td>
+    </tr>
+    <tr>
+      <th>creation_options</th>
+      <td><p>further settings of the GDAL COG driver; see <a href='https://gdal.org/drivers/raster/cog.html'>https://gdal.org/drivers/raster/cog.html</a></p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>proxy data cube object</p>
+    <p>path to the new image collection file for use as argument to <code><a href='image_collection.html'>image_collection</a></code></p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>This function returns a proxy object, i.e., it will not start any computations besides deriving the shape of the result.</p>
-<p>For performance reasons, <code>select_bands</code> should always be called directly on a cube created with <code><a href='raster_cube.html'>raster_cube</a></code> and 
-drop all unneded bands. This allows to reduce RasterIO and warp operations in GDAL.</p>
+    <p>This function requires the GDAL COG driver, which was added in GDAL version 3.1.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># create image collection from example Landsat data only </span>
@@ -168,28 +182,51 @@ drop all unneded bands. This allows to reduce RasterIO and warp operations in GD
 }
 
 <span class='no'>L8.col</span> <span class='kw'>=</span> <span class='fu'><a href='image_collection.html'>image_collection</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>"L8.db"</span>))
-<span class='no'>v</span> <span class='kw'>=</span> <span class='fu'><a href='cube_view.html'>cube_view</a></span>(<span class='kw'>extent</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>left</span><span class='kw'>=</span><span class='fl'>388941.2</span>, <span class='kw'>right</span><span class='kw'>=</span><span class='fl'>766552.4</span>,
-              <span class='kw'>bottom</span><span class='kw'>=</span><span class='fl'>4345299</span>, <span class='kw'>top</span><span class='kw'>=</span><span class='fl'>4744931</span>, <span class='kw'>t0</span><span class='kw'>=</span><span class='st'>"2018-04"</span>, <span class='kw'>t1</span><span class='kw'>=</span><span class='st'>"2018-07"</span>),
-              <span class='kw'>srs</span><span class='kw'>=</span><span class='st'>"EPSG:32618"</span>, <span class='kw'>nx</span> <span class='kw'>=</span> <span class='fl'>497</span>, <span class='kw'>ny</span><span class='kw'>=</span><span class='fl'>526</span>, <span class='kw'>dt</span><span class='kw'>=</span><span class='st'>"P1M"</span>)
-<span class='no'>L8.cube</span> <span class='kw'>=</span> <span class='fu'><a href='raster_cube.html'>raster_cube</a></span>(<span class='no'>L8.col</span>, <span class='no'>v</span>)
-<span class='no'>L8.rgb</span> <span class='kw'>=</span> <span class='fu'>select_bands</span>(<span class='no'>L8.cube</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"B02"</span>, <span class='st'>"B03"</span>, <span class='st'>"B04"</span>))
-<span class='no'>L8.rgb</span></div><div class='output co'>#&gt; A GDAL data cube proxy object
-#&gt; 
-#&gt; Dimensions:
-#&gt;        low     high count       pixel_size chunk_size
-#&gt; t  2018-04  2018-07     4              P1M          1
-#&gt; y  4345299  4744931   526 759.756653992395        256
-#&gt; x 388941.2 766552.4   497 759.781086519115        256
+<span class='no'>L8.col</span></div><div class='output co'>#&gt; A GDAL image collection object, referencing 19 images with 12  bands
+#&gt; Images:
+#&gt;                                       name      left      top   bottom
+#&gt; 1 LC08_L1TP_013032_20180131_20180207_01_T1 -74.67898 41.39099 39.25027
+#&gt; 2 LC08_L1TP_013032_20180405_20180417_01_T1 -74.70333 41.39106 39.25080
+#&gt; 3 LC08_L1TP_013032_20180421_20180502_01_T1 -74.70681 41.39107 39.25098
+#&gt; 4 LC08_L1TP_013032_20180710_20180717_01_T1 -74.66854 41.39096 39.24991
+#&gt; 5 LC08_L1TP_013032_20180827_20180911_01_T1 -74.67202 41.39097 39.25000
+#&gt; 6 LC08_L1TP_013032_20181030_20181115_01_T1 -74.69637 41.39104 39.25062
+#&gt;       right            datetime
+#&gt; 1 -71.92546 2018-01-31T00:00:00
+#&gt; 2 -71.94695 2018-04-05T00:00:00
+#&gt; 3 -71.95411 2018-04-21T00:00:00
+#&gt; 4 -71.91114 2018-07-10T00:00:00
+#&gt; 5 -71.91472 2018-08-27T00:00:00
+#&gt; 6 -71.93979 2018-10-30T00:00:00
+#&gt;                                                 srs
+#&gt; 1 +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs
+#&gt; 2 +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs
+#&gt; 3 +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs
+#&gt; 4 +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs
+#&gt; 5 +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs
+#&gt; 6 +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs
+#&gt; [ omitted 13 images ] 
 #&gt; 
 #&gt; Bands:
-#&gt;   name offset scale nodata unit
-#&gt; 1  B02      0     1    NaN     
-#&gt; 2  B03      0     1    NaN     
-#&gt; 3  B04      0     1    NaN     
+#&gt;    name offset scale unit   nodata image_count
+#&gt; 1   B01      0     1      0.000000          19
+#&gt; 2   B02      0     1      0.000000          19
+#&gt; 3   B03      0     1      0.000000          19
+#&gt; 4   B04      0     1      0.000000          19
+#&gt; 5   B05      0     1      0.000000          19
+#&gt; 6   B06      0     1      0.000000          19
+#&gt; 7   B07      0     1      0.000000          19
+#&gt; 8   B08      0     1      0.000000          19
+#&gt; 9   B09      0     1      0.000000          19
+#&gt; 10  B10      0     1      0.000000          19
+#&gt; 11  B11      0     1      0.000000          19
+#&gt; 12  BQA      0     1                        19
 #&gt; </div><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>L8.rgb</span>, <span class='kw'>rgb</span><span class='kw'>=</span><span class='fl'>3</span>:<span class='fl'>1</span>)</div><div class='img'><img src='select_bands-1.png' alt='' width='700' height='433' /></div><div class='input'># }
-
-</div></pre>
+<span class='kw'>if</span> (<span class='st'>"COG"</span> <span class='kw'>%in%</span> <span class='fu'><a href='gdalcubes_gdalformats.html'>gdalcubes_gdalformats</a></span>()) {
+  <span class='no'>L8.cog.col</span> <span class='kw'>=</span> <span class='fu'>translate_cog</span>(<span class='no'>L8.col</span>)
+  <span class='no'>L8.cog.col</span>
+}
+<span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
