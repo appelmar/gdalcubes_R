@@ -73,7 +73,7 @@ file(s) uses the enhanced netCDF-4 format, supporting chunking and compression."
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gdalcubes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
@@ -197,7 +197,7 @@ original scale.</p>
     <p>Packing is currently ignored if <code>chunked = TRUE</code></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='https://www.unidata.ucar.edu/software/netcdf/docs'>https://www.unidata.ucar.edu/software/netcdf/docs</a></p>
+    <div class='dont-index'><p><a href='https://www.unidata.ucar.edu/software/netcdf/docs/'>https://www.unidata.ucar.edu/software/netcdf/docs/</a></p>
 <p><code><a href='gdalcubes_set_ncdf_compression.html'>gdalcubes_set_ncdf_compression</a></code></p>
 <p><code><a href='pack_minmax.html'>pack_minmax</a></code></p></div>
 
@@ -208,8 +208,46 @@ original scale.</p>
   <span class='no'>L8_files</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"L8NY18"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"gdalcubes"</span>),
                          <span class='st'>".TIF"</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>full.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
   <span class='fu'><a href='create_image_collection.html'>create_image_collection</a></span>(<span class='no'>L8_files</span>, <span class='st'>"L8_L1TP"</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>"L8.db"</span>))
-}
-
+}</div><div class='output co'>#&gt; A GDAL image collection object, referencing 19 images with 12  bands
+#&gt; Images:
+#&gt;                                       name      left      top   bottom
+#&gt; 1 LC08_L1TP_013032_20180131_20180207_01_T1 -74.67898 41.39099 39.25027
+#&gt; 2 LC08_L1TP_013032_20180405_20180417_01_T1 -74.70333 41.39106 39.25080
+#&gt; 3 LC08_L1TP_013032_20180421_20180502_01_T1 -74.70681 41.39107 39.25098
+#&gt; 4 LC08_L1TP_013032_20180710_20180717_01_T1 -74.66854 41.39096 39.24991
+#&gt; 5 LC08_L1TP_013032_20180827_20180911_01_T1 -74.67202 41.39097 39.25000
+#&gt; 6 LC08_L1TP_013032_20181030_20181115_01_T1 -74.69637 41.39104 39.25062
+#&gt;       right            datetime
+#&gt; 1 -71.92546 2018-01-31T00:00:00
+#&gt; 2 -71.94695 2018-04-05T00:00:00
+#&gt; 3 -71.95411 2018-04-21T00:00:00
+#&gt; 4 -71.91114 2018-07-10T00:00:00
+#&gt; 5 -71.91472 2018-08-27T00:00:00
+#&gt; 6 -71.93979 2018-10-30T00:00:00
+#&gt;                                                 srs
+#&gt; 1 +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs
+#&gt; 2 +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs
+#&gt; 3 +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs
+#&gt; 4 +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs
+#&gt; 5 +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs
+#&gt; 6 +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs
+#&gt; [ omitted 13 images ] 
+#&gt; 
+#&gt; Bands:
+#&gt;    name offset scale unit   nodata image_count
+#&gt; 1   B01      0     1      0.000000          19
+#&gt; 2   B02      0     1      0.000000          19
+#&gt; 3   B03      0     1      0.000000          19
+#&gt; 4   B04      0     1      0.000000          19
+#&gt; 5   B05      0     1      0.000000          19
+#&gt; 6   B06      0     1      0.000000          19
+#&gt; 7   B07      0     1      0.000000          19
+#&gt; 8   B08      0     1      0.000000          19
+#&gt; 9   B09      0     1      0.000000          19
+#&gt; 10  B10      0     1      0.000000          19
+#&gt; 11  B11      0     1      0.000000          19
+#&gt; 12  BQA      0     1                        19
+#&gt; </div><div class='input'>
 <span class='no'>L8.col</span> <span class='kw'>=</span> <span class='fu'><a href='image_collection.html'>image_collection</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>"L8.db"</span>))
 <span class='no'>v</span> <span class='kw'>=</span> <span class='fu'><a href='cube_view.html'>cube_view</a></span>(<span class='kw'>extent</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>left</span><span class='kw'>=</span><span class='fl'>388941.2</span>, <span class='kw'>right</span><span class='kw'>=</span><span class='fl'>766552.4</span>,
               <span class='kw'>bottom</span><span class='kw'>=</span><span class='fl'>4345299</span>, <span class='kw'>top</span><span class='kw'>=</span><span class='fl'>4744931</span>, <span class='kw'>t0</span><span class='kw'>=</span><span class='st'>"2018-04"</span>, <span class='kw'>t1</span><span class='kw'>=</span><span class='st'>"2018-04"</span>),
